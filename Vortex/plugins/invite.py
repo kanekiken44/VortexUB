@@ -9,7 +9,7 @@ from telethon.tl.functions.messages import GetFullChatRequest
 
 from Vortex import CMD_HELP
 from Vortex.utils import admin_cmd, edit_or_reply, sudo_cmd
-from Vortex.cmdhelp import CmdHelp
+
 
 async def get_chatinfo(event):
     chat = event.pattern_match.group(1)
