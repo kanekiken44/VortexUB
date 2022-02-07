@@ -37,7 +37,7 @@ vortex += f"Assistant: {bots}\n"
 vortex += f"Sudo: {sudo}\n"
 vortex += f"PMSecurity: {pm}\n"
 vortex += f"\nVisit @VortexUBSupport for any help.\n"
-vortexstats = f"{Vortex}"
+vortexstats = f"{vortex}"
 
 THEFIRST_NAME = bot.me.first_name
 OWNER_ID = bot.me.id
