@@ -21,7 +21,7 @@ async def _(event):
             await conv.send_message("/start")
             await conv.get_response()
             await conv.send_message(lights)
-            rizoeldata = await conv.get_response()
+            vortexdata = await conv.get_response()
             await ok.edit(vortexdata.text + "\n\nMoreInfo Collected By Vortexuserbot")
         except YouBlockedUserError:
             await ok.edit("**Error**\n `Unblock` @tgscanrobot `and try again!")
