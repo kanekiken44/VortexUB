@@ -72,40 +72,6 @@ async def bigspam(e):
             )
 
 
-@Vortex.on(admin_cmd(pattern="picspam"))
-@Vortex.on(sudo_cmd(pattern="picspam", allow_sudo=True))
-async def tiny_pic_spam(e):
-    if not e.text[0].isalpha() and e.text[0] not in ("/", "#", "@", "!"):
-        message = e.text
-        text = message.split()
-        if int(e.chat_id) in resgrp:
-                text = f"Sorry !! I can't spam here"
-                await e.respond(text, parse_mode=None, link_preview=None )
-        else:
-            counter = int(text[1])
-            r_message = await e.get_reply_message()
-            downloaded_file_name = await borg.download_media(
-                r_message, Config.TMP_DOWNLOAD_DIRECTORY
-         )
-           if downloaded_file_name.endswith((".webp")):
-               resize_image(downloaded_file_name)
-           try:
-               x = upload_file(downloaded_file_name)
-               url = f"https://telegra.ph/{x[0]}"
-               os.remove(downloaded_file_name)
-           except BaseException:
-               return await e.edit("Error!")
-           if url:
-               for i in range(1, counter):
-                   await e.client.send_file(e.chat_id, url)
-               await e.delete()
-           else:
-               await e.edit("Pic not supported :/")
-           if LOGGER:
-               await e.client.send_message(
-                   LOGGER_GROUP, "#PICSPAM \n\n" "PicSpam was executed successfully"
-            )
-
 
 @Vortex.on(admin_cmd(pattern="delayspam (.*)"))
 @Vortex.on(sudo_cmd(pattern="delayspam (.*), allow_sudo=True"))
@@ -132,7 +98,6 @@ CMD_HELP.update(
         "spam": ".tspam <sentence>\nUse - Spams text\
         \n\n.spam <number> <sentence>\nUse - Spams\
         \n\n.bigspam <number> <sentence>\nUse - A Big Spam\
-        \n\n.picspam <reply to pic> <number>\nUse - Spams Pic\
         \n\n.delayspam <time> <word>\nUse - Spam, with some setted delay!"
     }
 )
