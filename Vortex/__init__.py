@@ -136,7 +136,7 @@ if bool(ENV):
     AUTOPIC_TEXT = os.environ.get(
         "AUTOPIC_TEXT",
         "Life Is too Short.\n And so is your TG account.")
-    AUTO_PIC_FONT = os.environ.get("AUTOPIC_FONT", "RiZoeL.ttf")
+    AUTO_PIC_FONT = os.environ.get("AUTOPIC_FONT", "vortex.ttf")
     AUTOPIC_FONT_COLOUR = os.environ.get("AUTOPIC_FONT_COLOUR", None)
 
     CMD_HNDLR = os.environ.get("CMD_HNDLR", r"\.")
@@ -195,4 +195,4 @@ LASTMSG = {}
 CMD_HELP = {}
 ISAFK = False
 AFKREASON = None
-# The RiZoeL
+
