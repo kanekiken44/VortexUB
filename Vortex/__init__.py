@@ -45,7 +45,7 @@ loop.run_until_complete(VorteX())
 
 
 StartTime = time.time()
-vortexversion = "1.0.1"
+Vortexversion = "1.0.1"
 
 CMD_LIST = {}
 CMD_HELP = {}
