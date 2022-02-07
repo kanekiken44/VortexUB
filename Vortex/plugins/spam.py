@@ -81,12 +81,12 @@ async def tiny_pic_spam(e):
         if int(e.chat_id) in resgrp:
                 text = f"Sorry !! I can't spam here"
                 await e.respond(text, parse_mode=None, link_preview=None )
-       else:
-           counter = int(text[1])
-           r_message = await e.get_reply_message()
-           downloaded_file_name = await borg.download_media(
-               r_message, Config.TMP_DOWNLOAD_DIRECTORY
-        )
+        else:
+            counter = int(text[1])
+            r_message = await e.get_reply_message()
+            downloaded_file_name = await borg.download_media(
+                r_message, Config.TMP_DOWNLOAD_DIRECTORY
+         )
            if downloaded_file_name.endswith((".webp")):
                resize_image(downloaded_file_name)
            try:
