@@ -5,7 +5,7 @@ from io import BytesIO
 import requests
 from PIL import Image
 
-from Vortex import ALIVE_NAME, CMD_HELP, vortexversion
+from Vortex import ALIVE_NAME, CMD_HELP, Vortexversion
 from Vortex.__init__ import StartTime
 from Vortex.Config import Config, Var
 
@@ -69,7 +69,7 @@ async def ifiamalive(alive):
         vortex += (
             f"┣➣ **Telethon Version**: `1.17`\n┣➣ **Python**: `3.9.2`\n"
         )
-        vortex += f"┣➣ **Vortex Version**: `{vortexversion}`\n"
+        vortex += f"┣➣ **Vortex Version**: `{Vortexversion}`\n"
         vortex += f"┣➣ **Support**: @VortexUBSupport\n"
         vortex += f"┣➣ **Sudo** : `{sudo}`\n"
         vortex += f"┣➣ **Uptime**: `{uptime}`\n"
@@ -99,7 +99,7 @@ async def ifiamalive(alive):
             f"`{CUSTOM_ALIVE}`\n\n"
             f"┏━━━━━━━━━━━━━━━━━━━\n"
             f"┣➣ **Telethon Version**: `1.17`\n┣➣ **Python**: `3.9.2`\n"
-            f"┣➣ **Vortex Version**: `{vortexversion}`\n"
+            f"┣➣ **Vortex Version**: `{Vortexversion}`\n"
             f"┣➣ **Support**: @VortexUBSupport\n"
             f"┣➣ **Sudo** : `{sudo}`\n"                
             f"┣➣ **Uptime**: `{uptime}`\n"
