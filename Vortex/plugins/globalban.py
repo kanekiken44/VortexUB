@@ -48,28 +48,28 @@ async def get_user_from_id(user, event):
     return user_obj
 
 
-@Rizoeluserbot.on(ChatAction)
-async def handler(rizoel):
-    if rizoel.user_joined or rizoel.user_added:
+@Vortex.on(ChatAction)
+async def handler(vortex):
+    if vortex.user_joined or vortex.user_added:
         try:
-            from Rizoeluserbot.plugins.sql_helper.gmute_sql import is_gmuted
+            from Vortex.plugins.sql_helper.gmute_sql import is_gmuted
 
-            guser = await rizoel.get_user()
+            guser = await vortex.get_user()
             gmuted = is_gmuted(guser.id)
         except BaseException:
             return
         if gmuted:
             for i in gmuted:
                 if i.sender == str(guser.id):
-                    chat = await rizoel.get_chat()
+                    chat = await vortex.get_chat()
                     admin = chat.admin_rights
                     creator = chat.creator
                     if admin or creator:
                         try:
                             await client.edit_permissions(
-                                rizoel.chat_id, guser.id, view_messages=False
+                                vortex.chat_id, guser.id, view_messages=False
                             )
-                            await rizoel.reply(
+                            await vortex.reply(
                                 f"** Gbanned User Joined!!** \n"
                                 f"**Victim Id**: [{guser.id}](tg://user?id={guser.id})\n"
                                 f"**Action **  : `Banned`"
@@ -78,7 +78,7 @@ async def handler(rizoel):
                             return
 
 
-@Rizoeluserbot.on(admin_cmd(pattern="gban(?: |$)(.*)"))
+@Vortex.on(admin_cmd(pattern="gban(?: |$)(.*)"))
 async def gspider(rk):
     lazy = rk
     sender = await lazy.get_sender()
@@ -111,7 +111,7 @@ async def gspider(rk):
         if user.id == 1517994352:
             return await rkp.edit("**Error! cant gban this user.**")
         try:
-            from Rizoeluserbot.plugins.sql_helper.gmute_sql import gmute
+            from Vortex.plugins.sql_helper.gmute_sql import gmute
         except BaseException:
             pass
         try:
@@ -142,7 +142,7 @@ async def gspider(rk):
     )
 
 
-@Rizoeluserbot.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
+@Vortex.on(admin_cmd(pattern="ungban(?: |$)(.*)"))
 async def gspider(rk):
     lazy = rk
     sender = await lazy.get_sender()
@@ -175,7 +175,7 @@ async def gspider(rk):
         if user.id == 1517994352:
             return await rkp.edit(f"**Error! cant ungban this user.**")
         try:
-            from Rizoeluserbot.plugins.sql_helper.gmute_sql import ungmute
+            from Vortex.plugins.sql_helper.gmute_sql import ungmute
         except BaseException:
             pass
         try:
