@@ -30,7 +30,6 @@ ALIVE_STRING += (
 ALIVE_STRING += f"┣➣ **Vortex Version**: `{Vortexversion}`\n"
 ALIVE_STRING += f"┣➣ **Support**: @VortexUBSupport\n"
 ALIVE_STRING += f"┣➣ **Sudo** : `{sudo}`\n"
-ALIVE_STRING += f"┣➣ **Uptime**: `{uptime}`\n"
 ALIVE_STRING += (
     f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
 )
