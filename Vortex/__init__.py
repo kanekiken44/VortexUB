@@ -21,12 +21,11 @@ async def VorteX():
        print("Starting Session.....")
        bot = TelegramClient(StringSession(rizz), Var.APP_ID, Var.API_HASH)
        try:
-           print("Booting Up The Client 1")
            await bot.start()
            botme = await bot.get_me()
            await bot(Jcr(channel="@VortexUB"))
-           await bot(Jcr(channel="@VorteXUbSupport")
-        except Exception as e:
+           await bot(Jcr(channel="@VorteXUbSupport"))
+       except Exception as e:
            print(e)
            pass
    else:
@@ -36,6 +35,7 @@ async def VorteX():
           await bot.start()
        except Exception as e:
           pass
+
 
 loop = asyncio.get_event_loop()
 loop.run_until_complete(VorteX())
