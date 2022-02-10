@@ -108,6 +108,7 @@ async def ifiamalive(alive):
         img.save(sticker, "webp")
         sticker.name = "sticker.webp"
         sticker.seek(0)
+        uptime = get_readable_time((time.time() - StartTime))
         await borg.send_file(
             alive.chat_id, 
             ALV_PIC, 
