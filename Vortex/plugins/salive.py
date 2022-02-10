@@ -10,12 +10,14 @@ from Vortex import ALIVE_NAME, CMD_HELP, Vortexversion
 from Vortex.__init__ import StartTime
 from Vortex.Config import Config, Var
 
+START_PIC = "https://telegra.ph/file/cc29c25774e5906547310.jpg"
+
 CUSTOM_ALIVE = (
     Var.CUSTOM_ALIVE
     if Var.CUSTOM_ALIVE
     else "Vortex is Alive"
 )
-ALV_PIC = Var.ALIVE_PIC if Var.ALIVE_PIC else None
+ALV_PIC = Var.ALIVE_PIC if Var.ALIVE_PIC else START_PIC
 alivemoji = Var.CUSTOM_ALIVE_EMOJI if Var.CUSTOM_ALIVE_EMOJI else "🖤️"
 if Config.SUDO_USERS:
     sudo = "Enabled"
