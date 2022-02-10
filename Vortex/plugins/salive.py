@@ -53,8 +53,8 @@ def get_readable_time(seconds: int) -> str:
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@VortexUB"
 
 
-@Vortex.on(admin_cmd(outgoing=True, pattern="alive"))
-@Vortex.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
+@Vortex.on(admin_cmd(outgoing=True, pattern="salive"))
+@Vortex.on(sudo_cmd(outgoing=True, pattern="salive", allow_sudo=True))
 async def ifiamalive(alive):
     start = datetime.now()
     myid = bot.uid
