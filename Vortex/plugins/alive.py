@@ -107,11 +107,7 @@ async def ifiamalive(alive):
         )
         ALIVE_STRING += f"┗━━━━━━━━━━━━━━━━━━━\n"
         ALIVE_STRING += "    [Repo](https://github.com/Kanekiken44/VortexUB)"
-        await borg.send_file(
-            alive.chat_id, 
-            ALV_PIC, 
-            caption=ALIVE_STRING,  
-            link_preview=False)
+        borg.send_file(alive.chat_id, ALV_PIC, caption=ALIVE_STRING, link_preview=False
         await alive.delete()
 
 
