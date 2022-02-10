@@ -21,6 +21,21 @@ if Config.SUDO_USERS:
 else:
     sudo = "Disabled"
 
+ALIVE_STRING = f"**The Vortex Userbot is Running.....**\n\n"
+ALIVE_STRING += f"`{CUSTOM_ALIVE}`\n\n"
+ALIVE_STRING += f"┏━━━━━━━━━━━━━━━━━━━\n"
+ALIVE_STRING += (
+    f"┣➣ **Telethon Version**: `1.17`\n┣➣ **Python**: `3.9.2`\n"
+)
+ALIVE_STRING += f"┣➣ **Vortex Version**: `{Vortexversion}`\n"
+ALIVE_STRING += f"┣➣ **Support**: @VortexUBSupport\n"
+ALIVE_STRING += f"┣➣ **Sudo** : `{sudo}`\n"
+ALIVE_STRING += f"┣➣ **Uptime**: `{uptime}`\n"
+ALIVE_STRING += (
+    f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
+)
+ALIVE_STRING += f"┗━━━━━━━━━━━━━━━━━━━\n"
+ALIVE_STRING += "    [Repo](https://github.com/Kanekiken44/VortexUB)"
 
 def get_readable_time(seconds: int) -> str:
     count = 0
@@ -96,7 +111,7 @@ async def ifiamalive(alive):
         await borg.send_file(
             alive.chat_id, 
             ALV_PIC, 
-            caption=vortex,  
+            caption=ALIVE_STRING,  
             link_preview=False)
         await alive.delete()
 
