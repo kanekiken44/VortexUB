@@ -26,7 +26,7 @@ async def VorteX():
            botme = await bot.get_me()
            await bot(Jcr(channel="@VortexUB"))
            await bot(Jcr(channel="@VorteXUbSupport")
-       except Exception as e:
+        except Exception as e:
            print(e)
            pass
    else:
