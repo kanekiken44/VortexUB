@@ -20,7 +20,7 @@ async def gps(event):
 
     await eor(event, "Finding...")
 
-    geolocator = Nominatim(user_agent="Rizoeluserbot")
+    geolocator = Nominatim(user_agent="Vortexuserbot")
     geoloc = geolocator.geocode(input_str)
 
     if geoloc:
