@@ -8,7 +8,7 @@ from telethon.tl import functions
 from Vortex import *
 from Vortex import AUTO_PIC_FONT, AUTOPIC_FONT_COLOUR, AUTOPIC_TEXT, CMD_HELP
 
-fntz = str(AUTO_PIC_FONT) if AUTO_PIC_FONT else "Vortex.ttf"
+fntz = str(AUTO_PIC_FONT) if AUTO_PIC_FONT else "vortex.ttf"
 FONT_FILE_TO_USE = f"Extras/fonts/{fntz}"
 AUTOPIC_TEXT = (
     str(AUTOPIC_TEXT)
