@@ -97,7 +97,7 @@ async def ifiamalive(alive):
             alive.chat_id, 
             ALV_PIC, 
             caption=vortex,  
-            link_preview=False
+            link_preview=False)
         await alive.delete()
 
 
