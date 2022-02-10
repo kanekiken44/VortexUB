@@ -63,7 +63,7 @@ async def ifiamalive(alive):
     (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
     if ALV_PIC:
-        vortex = f"**🖤 𝚃𝚑𝚎 𝚅𝚘𝚛𝚝𝚎𝚡 𝚄𝚜𝚎𝚛𝙱𝚘𝚝 🖤️**\n\n"
+        vortex = f"**The Vortex Userbot is Running.....**\n\n"
         vortex += f"`{CUSTOM_ALIVE}`\n\n"
         vortex += f"┏━━━━━━━━━━━━━━━━━━━\n"
         vortex += (
@@ -82,33 +82,6 @@ async def ifiamalive(alive):
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
         await borg.send_file(alive.chat_id, ALV_PIC, caption=vortex, link_preview=False)
-        await alive.delete()
-        return
-    req = requests.get("https://telegra.ph/file/6d4ec6d9113e071bae716.jpg")
-    req.raise_for_status()
-    file = BytesIO(req.content)
-    file.seek(0)
-    img = Image.open(file)
-    with BytesIO() as sticker:
-        img.save(sticker, "webp")
-        sticker.name = "sticker.webp"
-        sticker.seek(0)
-        await borg.send_message(
-            alive.chat_id,
-            f"**🖤 𝚃𝚑𝚎 𝚅𝚘𝚛𝚝𝚎𝚡 𝚄𝚜𝚎𝚛𝙱𝚘𝚝 🖤️**\n\n"
-            f"`{CUSTOM_ALIVE}`\n\n"
-            f"┏━━━━━━━━━━━━━━━━━━━\n"
-            f"┣➣ **Telethon Version**: `1.17`\n┣➣ **Python**: `3.9.2`\n"
-            f"┣➣ **Vortex Version**: `{Vortexversion}`\n"
-            f"┣➣ **Support**: @VortexUBSupport\n"
-            f"┣➣ **Sudo** : `{sudo}`\n"                
-            f"┣➣ **Uptime**: `{uptime}`\n"
-            f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
-            f"┗━━━━━━━━━━━━━━━━━━━\n\n"
-            f"[Repo](https://github.com/Kanekiken44/VortexUB)",
-            link_preview=False,
-        )
-        await borg.send_file(alive.chat_id, file=sticker)
         await alive.delete()
 
 
