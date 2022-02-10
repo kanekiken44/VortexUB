@@ -1,22 +1,4 @@
-Skip to content
-kanekiken44
-/
-VortexUB
-Public
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-Settings
-VortexUB/Vortex/plugins/alive.py
-@kanekiken44
-kanekiken44 Update alive.py
- 1 contributor
-115 lines (100 sloc)  4.06 KB
+
 import time
 from datetime import datetime
 from io import BytesIO
