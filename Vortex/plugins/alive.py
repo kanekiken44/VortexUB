@@ -83,6 +83,23 @@ async def ifiamalive(alive):
         """ For .alive command, check if the bot is running.  """
         await borg.send_file(alive.chat_id, ALV_PIC, caption=vortex, link_preview=False)
         await alive.delete()
+        return
+    req = requests.get("https://telegra.ph/file/6d4ec6d9113e071bae716.jpg")
+    req.raise_for_status()
+    file = BytesIO(req.content)
+    file.seek(0)
+    img = Image.open(file)
+    with BytesIO() as sticker:
+        img.save(sticker, "webp")
+        sticker.name = "sticker.webp"
+        sticker.seek(0)
+        await borg.send_file(
+            alive.chat_id, 
+            ALV_PIC, 
+            caption=vortex,  
+            link_preview=False
+        await alive.delete()
+
 
 
 CMD_HELP.update({"alive": "➨ `.alive`\nUse - Check is it Alive or Dead(RIP)."})
