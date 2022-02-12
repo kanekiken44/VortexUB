@@ -267,6 +267,26 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         text = vortexstats
         await event.answer(text, alert=True)
 
+
+    @tgbot.on(callbackquery.CallbackQuery(data=compile(b"page\((.+?)\)")))
+    async def page(event):
+        if not event.query.user_id == bot.uid:
+            return await event.answer(
+                "Please get your own Userbot, and don't use mine!"
+                cache_time=0,
+                alert=True,
+            )
+        page = int(event.data_match.group(1).decode("UTF-8"))
+        veriler = button(page, CMD_HELP)
+        query = event.text
+        if event.query.user_id == bot.uid and query.startswith("`Userbot"):
+            rev_text = query[::-1]
+            await event.edit(
+                f"{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
+                buttons=veriler[1],
+                link_preview=False,
+            )
+
     @tgbot.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(rb"helpme_prev\((.+?)\)")
@@ -315,7 +335,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                  userbot".format(
                 plugin_name
             )
-            if len(help_string) >= 140:
+            if len(help_string) >= 14000:
                 oops = "Commands are too long!\nSent your saved messages!"
                 await event.answer(oops, cache_time=0, alert=True)
                 help_string += "\n\nThis will be automatically deleted in 1 minute!"
@@ -324,7 +344,8 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     await asyncio.sleep(60)
                     await ok.delete()
             else:
-                await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
+                buuttons=[Button.inline("Back", data=f"page({page})")]
+                await event.edit(reply_pop_up_alert, buttons=buuttons)
         else:
             reply_pop_up_alert = "Please deploy your own Userbot, Don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
