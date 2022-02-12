@@ -282,7 +282,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         if event.query.user_id == bot.uid and query.startswith("`Userbot"):
             rev_text = query[::-1]
             await event.edit(
-                f"{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
+                "{}\nCurrently Loaded Plugins: {}".format(query, len(CMD_LIST)),
                 buttons=veriler[1],
                 link_preview=False,
             )
