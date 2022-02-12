@@ -276,7 +276,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 alert=True,
             )
         page = str(event.data_match.group(1).decode("UTF-8"))
-        veriler = button(page, CMD_HELP)
+        veriler = paginate_help(page, CMD_HELP)
         query = event.text
         if event.query.user_id == bot.uid and query.startswith("`Userbot"):
             rev_text = query[::-1]
