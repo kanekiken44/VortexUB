@@ -272,7 +272,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
     async def page(event):
         if not event.query.user_id == bot.uid:
             return await event.answer(
-                "Please get your own Userbot, and don't use mine!"
+                "Please get your own Userbot, and don't use mine!",
                 cache_time=0,
                 alert=True,
             )
@@ -377,11 +377,11 @@ def paginate_help(page_number, loaded_plugins, prefix):
         ] + [
             (
                 custom.Button.inline(
-                    "⬛️ Previous", data="{}_prev({})".format(prefix, modulo_page)
+                    "Previous", data="{}_prev({})".format(prefix, modulo_page)
                 ),
-                custom.Button.inline("❌️ Close ❌️", data="close"),
+                custom.Button.inline("Close", data="close"),
                 custom.Button.inline(
-                    "NEXT ▶️️", data="{}_next({})".format(prefix, modulo_page)
+                    "Next", data="{}_next({})".format(prefix, modulo_page)
                 ),
             )
         ]
