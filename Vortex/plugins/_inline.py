@@ -267,8 +267,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         text = vortexstats
         await event.answer(text, alert=True)
 
-
-    @tgbot.on(callbackquery.CallbackQuery(data=compile(b"page\((.+?)\)")))
+    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"page\((.+?)\)")))
     async def page(event):
         if not event.query.user_id == bot.uid:
             return await event.answer(
