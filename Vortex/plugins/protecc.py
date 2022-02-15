@@ -63,7 +63,7 @@ async def _(event):
         img_size = img_size_div.find_all("div")
         OUTPUT_STR = """/protecc {prs_text}""".format(
             **locals())
-    await hell.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
+    await event.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
 @Vortex.on()
@@ -103,9 +103,9 @@ async def _(event):
                         return
                 except:
                     pass
-                hell = await event.client.send_message(event.chat_id, f"/protecc {text}")
+                lol = await event.client.send_message(event.chat_id, f"/protecc {text}")
                 await sleep(2)
-                await hell.delete()
+                await lol.delete()
                 os.remove(dl)
             except:
                 pass
@@ -139,13 +139,13 @@ async def _(event):
 
 @Vortex.on(pattern="aw$")
 async def _(event):
-    hell = await eor(event, "Fetching Autowaifu chats...")
+    lol = await eor(event, "Fetching Autowaifu chats...")
     all_grp = get_all_grp()
     x = "**Autowaifu enabled chats :** \n\n"
     for i in all_grp:
         ch = i.chat_id
         cht = int(ch)
         x += f"• `{cht}`\n"
-    await hell.edit(x)
+    await lol.edit(x)
 
 
