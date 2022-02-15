@@ -149,16 +149,3 @@ async def _(event):
     await hell.edit(x)
 
 
-CmdHelp("protecc").add_command(
-  "pt", "<reply>", "Auto Protecc the waifu."
-).add_command(
-  "adwaifu", None, "Adds the current group to AutoWaifu Database. Need to setup WAIFU_CATCHER var with value TRUE."
-).add_command(
-  "rmwaifu", None, "Removes the group from AutoWaifu Database."
-).add_command(
-  "aw", None, "Gives the list of all chats with Autowaifu enabled."
-).add_info(
-  "Waifu Protecc."
-).add_warning(
-  "✅ Harmless Module."
-).add()
