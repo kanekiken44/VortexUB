@@ -1,7 +1,8 @@
 
 
 from sqlalchemy import Boolean, Column, Integer, String, UnicodeText
-from Vortex import BASE, STRING_SESSION
+from Vortex.plugins.sql_helper import SESSION, BASE
+
 
 
 class Harem(BASE):
