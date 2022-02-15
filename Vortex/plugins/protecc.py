@@ -20,7 +20,7 @@ def progress(current, total):
         )
     )
 
-@Vortex.on(pattern="pt(?:\s|$)([\s\S]*)")
+@Vortex.on(admin_cmd(pattern="pp(.*)"))
 async def _(event):
     hell = await eor(event, "Hmm..")
     BASE_URL = "http://images.google.com"
@@ -113,7 +113,7 @@ async def _(event):
             pass
 
 
-@Vortex.on(pattern="adwaifu(?:\s|$)([\s\S]*)")
+@Vortex.on(admin_cmd(pattern="adwaifu(.*)"))
 async def _(event):
     if not event.is_group:
         await eod(event, "Autowaifu works in Groups Only !!")
@@ -125,7 +125,7 @@ async def _(event):
     await eod(event, f"**Added Chat** {event.chat.title} **With Id** `{event.chat_id}` **To Autowaifu Database.**")
 
 
-@Vortex.on(pattern="rmwaifu(?:\s|$)([\s\S]*)")
+@Vortex.on(admin_cmd(pattern="rmwaifu(.*)"))
 async def _(event):
     if not event.is_group:
         await eod(event, "Autowaifu works in groups only !!")
@@ -137,7 +137,7 @@ async def _(event):
     await eod(event, f"**Removed Chat** {event.chat.title} **With Id** `{event.chat_id}` **From AutoWaifu Database.**")
 
 
-@Vortex.on(pattern="aw$")
+@Vortex.on(admin_cmd(pattern="aw(.*)"))
 async def _(event):
     lol = await eor(event, "Fetching Autowaifu chats...")
     all_grp = get_all_grp()
