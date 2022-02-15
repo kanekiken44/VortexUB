@@ -7,7 +7,7 @@ import requests
 from asyncio import sleep
 from bs4 import BeautifulSoup
 
-from hellbot.sql.waifu_sql import is_harem, add_grp, rm_grp, get_all_grp
+from Vortex.sql_helper.protecc_sql import is_harem, add_grp, rm_grp, get_all_grp
 from . import *
 
 qt = "waifu appeared!"
@@ -20,7 +20,7 @@ def progress(current, total):
         )
     )
 
-@hell_cmd(pattern="pt(?:\s|$)([\s\S]*)")
+@Vortex.on(pattern="pt(?:\s|$)([\s\S]*)")
 async def _(event):
     hell = await eor(event, "Hmm..")
     BASE_URL = "http://images.google.com"
@@ -66,7 +66,7 @@ async def _(event):
     await hell.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
-@hell_handler()
+@Vortex.on()
 async def _(event):
     if not event.media:
         return
@@ -113,7 +113,7 @@ async def _(event):
             pass
 
 
-@hell_cmd(pattern="adwaifu(?:\s|$)([\s\S]*)")
+@Vortex.on(pattern="adwaifu(?:\s|$)([\s\S]*)")
 async def _(event):
     if not event.is_group:
         await eod(event, "Autowaifu works in Groups Only !!")
@@ -125,7 +125,7 @@ async def _(event):
     await eod(event, f"**Added Chat** {event.chat.title} **With Id** `{event.chat_id}` **To Autowaifu Database.**")
 
 
-@hell_cmd(pattern="rmwaifu(?:\s|$)([\s\S]*)")
+@Vortex.on(pattern="rmwaifu(?:\s|$)([\s\S]*)")
 async def _(event):
     if not event.is_group:
         await eod(event, "Autowaifu works in groups only !!")
@@ -137,7 +137,7 @@ async def _(event):
     await eod(event, f"**Removed Chat** {event.chat.title} **With Id** `{event.chat_id}` **From AutoWaifu Database.**")
 
 
-@hell_cmd(pattern="aw$")
+@Vortex.on(pattern="aw$")
 async def _(event):
     hell = await eor(event, "Fetching Autowaifu chats...")
     all_grp = get_all_grp()
