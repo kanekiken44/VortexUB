@@ -197,6 +197,15 @@ def admin_cmd(pattern=None, **args):
 """ Userbot module for managing events.
  One of the main components of the userbot. """
 
+def on(**args):
+    def decorator(func):
+        async def wrapper(event):
+            await func(event)
+        bot.add_event_handler(wrapper, events.NewMessage(**args))
+        return wrapper
+
+    return decorater
+
 
 def register(**args):
     """ Register a new event. """
