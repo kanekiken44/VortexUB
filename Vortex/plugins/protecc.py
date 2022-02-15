@@ -7,7 +7,7 @@ import requests
 from asyncio import sleep
 from bs4 import BeautifulSoup
 
-from Vortex.plugins.sql_helper.sql_helper.protecc_sql import is_harem, add_grp, rm_grp, get_all_grp
+from Vortex.plugins.sql_helper.protecc_sql import is_harem, add_grp, rm_grp, get_all_grp
 from . import *
 
 qt = "waifu appeared!"
