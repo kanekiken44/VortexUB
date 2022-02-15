@@ -66,7 +66,7 @@ async def _(event):
     await event.edit(OUTPUT_STR, parse_mode="HTML", link_preview=False)
 
 
-@Vortex.on_event()
+@Vortex.on()
 async def _(event):
     if not event.media:
         return
