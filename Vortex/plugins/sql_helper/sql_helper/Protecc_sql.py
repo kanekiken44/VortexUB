@@ -1,5 +1,5 @@
 from sqlalchemy import Boolean, Column, Integer, String, UnicodeText
-from . import BASE, STRING_STRING_SESSION
+from Vortex import BASE, STRING_SESSION
 
 
 class Harem(BASE):
