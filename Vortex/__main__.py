@@ -4,7 +4,7 @@ from sys import argv
 from telethon import TelegramClient
 import Vortex
 from Vortex.Config import Var
-from Vortex.utils import load_module, start_mybot
+from Vortex.utils import load_module
 from pathlib import Path
 import telethon.utils
 from Vortex import CMD_HNDLR
