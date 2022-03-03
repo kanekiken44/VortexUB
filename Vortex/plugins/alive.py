@@ -76,7 +76,7 @@ async def ifiamalive(alive):
             f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
         )
         vortex += f"┗━━━━━━━━━━━━━━━━━━━\n"
-        vortex += "    [Repo](https://github.com/Kanekiken44/VortexUB)"
+        vortex += "• [Repo](https://github.com/Kanekiken44/VortexUB)"
         await alive.get_chat()
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
@@ -97,7 +97,7 @@ async def ifiamalive(alive):
         ALIVE_STRING += f"`{CUSTOM_ALIVE}`\n\n"
         ALIVE_STRING += f"┏━━━━━━━━━━━━━━━━━━━\n"
         ALIVE_STRING += (
-            f"┣➣ **Telethon Version**: `1.17`\n┣➣ **Python**: `3.9.2`\n"
+            f"┣➣ **Telethon Version**: `1.23.0`\n┣➣ **Python**: `3.9.2`\n"
         )
         ALIVE_STRING += f"┣➣ **Vortex Version**: `{Vortexversion}`\n"
         ALIVE_STRING += f"┣➣ **Support**: @VortexUBSupport\n"
@@ -106,7 +106,7 @@ async def ifiamalive(alive):
             f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
         )
         ALIVE_STRING += f"┗━━━━━━━━━━━━━━━━━━━\n"
-        ALIVE_STRING += "    [Repo](https://github.com/Kanekiken44/VortexUB)"
+        ALIVE_STRING += "• [Repo](https://github.com/Kanekiken44/VortexUB)"
         await borg.send_file(alive.chat_id, ALV_PIC, caption=ALIVE_STRING, link_preview=False)
         await alive.delete()
 
