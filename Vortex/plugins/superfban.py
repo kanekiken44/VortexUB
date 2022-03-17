@@ -6,7 +6,6 @@ EXCLUDE_FED = os.environ.get("EXCLUDE_FED", None)
 
 @Vortex.on(admin_cmd(outgoing=True, pattern="sfban"))
 @Vortex.on(sudo_cmd(outgoing=True, pattern="sfban", allow_sudo=True))
-
 async def _(event):
     if event.fwd_from:
         return
@@ -214,10 +213,4 @@ async def _(event):
     await event.edit(f"SuperUnFBan Completed. Affected {len(fedList)} feds.\n")
 
 
-CmdHelp("fban").add_command(
-  "sfban", "<username/id> <reason>", "MassBan in all feds you are admin in."
-).add_command(
-  "sunfban", "<username/id> <reason>", "Mass Unfban in all your feds."
-).add()
-
-CMD_HELP.update({"__/sfban__" "<username/id> <reason>", "MassBan in all feds you are admin in."})
+CMD_HELP.update({"__/sfban__ <username/id> <reason>, MassBan in all feds you are admin in."})
