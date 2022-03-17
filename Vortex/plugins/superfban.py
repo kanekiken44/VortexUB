@@ -213,4 +213,4 @@ async def _(event):
     await event.edit(f"SuperUnFBan Completed. Affected {len(fedList)} feds.\n")
 
 
-CMD_HELP.update({"__/sfban__ <username/id> <reason>, MassBan in all feds you are admin in."})
+#BC
