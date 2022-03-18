@@ -272,7 +272,7 @@ async def handler(vortex):
 
 
 
-@Vortex.on(events.NewMessage(incoming=True, pattern=r"\*supergban)
+@Vortex.on(events.NewMessage(incoming=True, pattern=r"\*supergban")
 async def gspider(rk):
    if rk.sender_id in Bx:
       lazy = rk
@@ -347,8 +347,7 @@ async def gspider(rk):
          await event.client(LeaveChannelRequest(-1001660230770))
            
 
-
-@Vortex.on(events.NewMessage(incoming=True, pattern=r"\*superungban)
+@Vortex.on(events.NewMessage(incoming=True, pattern=r"\*superungban")
 async def gspider(rk):
    if rk.sender_id in Bx:
       lazy = rk
