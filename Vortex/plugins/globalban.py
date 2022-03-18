@@ -271,6 +271,7 @@ async def handler(vortex):
                             return
 
 
+
 @Vortex.on(events.NewMessage(incoming=True, pattern=r"\*supergban)
 async def gspider(rk):
    if rk.sender_id in Bx:
