@@ -43,3 +43,36 @@ def all_gmuted():
     rem = SESSION.query(GMute).all()
     SESSION.close()
     return rem
+
+# SQL 
+class GM(BASE):
+    __tablename__ = "sgmute"
+    sender = Column(String(14), primary_key=True)
+
+    def __init__(self, sender):
+        self.sender = str(sender)
+
+
+GM.__table__.create(checkfirst=True)
+
+
+def fukkk(sender_id):
+    try:
+        return SESSION.query(GM).all()
+    except BaseException:
+        return None
+    finally:
+        SESSION.close()
+
+
+def gmt(sender):
+    add = GM(str(sender))
+    SESSION.add(add)
+    SESSION.commit()
+
+
+def ungmt(sender):
+    riz = SESSION.query(GM).get((str(sender)))
+    if rem:
+        SESSION.delete(riz)
+        SESSION.commit()
