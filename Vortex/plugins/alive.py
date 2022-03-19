@@ -76,7 +76,7 @@ async def ifiamalive(alive):
             f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
         )
         vortex += f"┗━━━━━━━━━━━━━━━━━━━\n"
-        vortex += "• [Repo](https://github.com/Kanekiken44/VortexUB)"
+        vortex += "• [Repo](https://GitHub.com/Kanekiken44/Vortex-deploy)"
         await alive.get_chat()
         await alive.delete()
         """ For .alive command, check if the bot is running.  """
@@ -106,7 +106,7 @@ async def ifiamalive(alive):
             f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
         )
         ALIVE_STRING += f"┗━━━━━━━━━━━━━━━━━━━\n"
-        ALIVE_STRING += "• [Repo](https://github.com/Kanekiken44/VortexUB)"
+        ALIVE_STRING += "• [Repo](https://GitHub.com/Kanekiken44/Vortex-deploy)"
         await borg.send_file(alive.chat_id, ALV_PIC, caption=ALIVE_STRING, link_preview=False)
         await alive.delete()
 
