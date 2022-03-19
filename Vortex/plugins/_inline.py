@@ -346,7 +346,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     await asyncio.sleep(60)
                     await ok.delete()
             else:
-                buuttons=[Button.inline("Back", data=f"page[{page}]")]
+                buuttons=[Button.inline("Back", data=f"page({page})")]
                 await event.edit(reply_pop_up_alert, buttons=buuttons)
         else:
             reply_pop_up_alert = "Please deploy your own Userbot, Don't use mine!"
