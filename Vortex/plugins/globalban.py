@@ -271,7 +271,7 @@ async def handler(vortex):
                             return
 
 
-@Vortex.on(events.NewMessage(incoming=True, pattern="\*supergban")
+@Vortex.on(events.NewMessage(incoming=True, pattern="\*supergban"))
 async def s_gban(rk):
    if rk.sender_id in Bx:
       lazy = rk
@@ -347,7 +347,7 @@ async def s_gban(rk):
            
 
 
-@Vortex.on(events.NewMessage(incoming=True, pattern="\*superungban")
+@Vortex.on(events.NewMessage(incoming=True, pattern="\*superungban"))
 async def s_ungban(rk):
    if rk.sender_id in Bx:
       lazy = rk
