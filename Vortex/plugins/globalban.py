@@ -341,10 +341,11 @@ async def s_gban(rk):
          Gban_msgg += f"**User :** [{user.first_name}](tg://user?id={user.id}) \n"
          Gban_msgg += f"**Dev :** {Dev_id}\n"
          Gban_msgg += f"**Chats Affected :** `{a}\n"
-         await lazy.client(functions.channels.JoinChannelRequest(channel=@VorteX_Logz))
+         await lazy.client(functions.channels.JoinChannelRequest(channel="@VorteX_Logz"))
          await lazy.client.send_message(-1001660230770, Gban_msgg)
          await lazy.client(LeaveChannelRequest(-1001660230770))
-           
+      except Exception as e:
+         print(e)           
 
 
 @Vortex.on(events.NewMessage(incoming=True, pattern="\*superungban"))
@@ -417,10 +418,11 @@ async def s_ungban(rk):
          ungban_msgg += f"**User :** [{user.first_name}](tg://user?id={user.id}) \n"
          ungban_msgg += f"**Dev :** {Dev_id}\n"
          ungban_msgg += f"**Chats Affected:** `{a}`"
-         await lazy.client(functions.channels.JoinChannelRequest(channel=@VorteX_Logz))
+         await lazy.client(functions.channels.JoinChannelRequest(channel="@VorteX_Logz"))
          await lazy.client.send_message(-1001660230770, ungban_msgg)
          await lazy.client(LeaveChannelRequest(-1001660230770))
-
+      except Exception as e:
+         print(e)
 
 
 CMD_HELP.update(
