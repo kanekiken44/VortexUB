@@ -80,7 +80,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 text=f"**Vortexuserbot Stats For [{DEFAULTUSER}](tg://user?id={myid})**\n\n__Bot is functioning normally, master!__\n\n(c) @VortexUBsupport",
                 buttons=[
                     [custom.Button.inline("Stats", data="statcheck")],
-                    [Button.url("Repo", "https://github.com/KenKaneki444/VortexUB")],
+                    [Button.url("Repo", "https://GitHub.com/Kanekiken44/Vortex-deploy")],
                     [
                         Button.url(
                             "Deploy Your Own!",
@@ -109,7 +109,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 text=f"Vortexuserbot - Telegram Userbot by Team Vortex",
                 buttons=[
                     [
-                        Button.url("Repo", "https://github.com/kenkaneki444/VortexUB"),
+                        Button.url("Repo", "https://GitHub.com/Kanekiken44/Vortex-deploy"),
                         Button.url(
                             "Deploy Your Own",
                             "https://t.me/VortexUBSupport",
@@ -126,7 +126,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [custom.Button.url("✨SUPPORT✨", "https://t.me/VortexUBSupport")],
                     [
                         custom.Button.url(
-                            "GITHUB", "https://github.com/Kenkaneki444/VortexUB"
+                            "GITHUB", "https://GitHub.com/Kanekiken44/Vortex-deploy"
                         ),
                         custom.Button.url(
                             "Deploy Your Own",
