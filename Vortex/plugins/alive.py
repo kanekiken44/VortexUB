@@ -55,8 +55,8 @@ def get_readable_time(seconds: int) -> str:
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "@VortexUB"
 
 
-@Vortex.on(admin_cmd(outgoing=True, pattern="salive"))
-@Vortex.on(sudo_cmd(outgoing=True, pattern="salive", allow_sudo=True))
+@Vortex.on(admin_cmd(outgoing=True, pattern="alive"))
+@Vortex.on(sudo_cmd(outgoing=True, pattern="alive", allow_sudo=True))
 async def ifiamalive(alive):
     start = datetime.now()
     myid = bot.uid
@@ -78,7 +78,7 @@ async def ifiamalive(alive):
         f"┣➣ {alivemoji} **My Master** : [{DEFAULTUSER}](tg://user?id={myid})\n\n"
     )
     vortex += f"┗━━━━━━━━━━━━━━━━━━━\n"
-    vortex += "    [Repo](https://github.com/Kanekiken44/VortexUB)"
+    vortex += "    [Repo](https://github.com/Kanekiken44/Vortex-deploy)"
     await alive.get_chat()
     await alive.delete()
     """ For .alive command, check if the bot is running.  """
