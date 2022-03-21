@@ -65,7 +65,6 @@ async def ifiamalive(alive):
     (end - start).microseconds / 1000
     uptime = get_readable_time((time.time() - StartTime))
     vortex = f"**The Vortex Userbot is Running.....**\n\n"
-    vortex += f"`{CUSTOM_ALIVE}`\n\n"
     vortex += f"┏━━━━━━━━━━━━━━━━━━━\n"
     vortex += (
         f"┣➣ **Telethon Version**: `1.17`\n┣➣ **Python**: `3.9.2`\n"
