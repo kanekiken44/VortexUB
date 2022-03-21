@@ -134,7 +134,7 @@ if bool(ENV):
     UPSTREAM_REPO_URL = os.environ.get(
        "UPSTREAM_REPO_URL",
        "https://github.com/kanekiken44/vortexub.git")
-      
+    UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "main")  
       
     # Default .alive name
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
