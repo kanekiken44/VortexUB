@@ -125,7 +125,13 @@ if bool(ENV):
 
     # Youtube API key
     YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
-
+    
+    #repo url
+    UPSTREAM_REPO_URL = os.environ.get(
+       "UPSTREAM_REPO_URL",
+       "https://github.com/kanekiken44/vortexub.git")
+      
+      
     # Default .alive name
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 
