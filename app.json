@@ -111,7 +111,7 @@
     },
    "TEMP_DOWNLOAD_DIRECTORY": {
    "description": "Where downloaded files will go.",
-   "value": "./Vortex/DOWNLOADS/",
+   "value": "./VortexUb/DOWNLOADS/",
    "required": false
   },
     "TZ": {
