@@ -1,6 +1,13 @@
 import sys
 import math
-import time
+import traceback
+import datetime
+import logging
+import inspect
+import asyncio
+from traceback import format_exc
+import subprocess
+import time import gmtime, strftime
 from Vortex import bot
 from telethon import events
 from pathlib import Path
@@ -9,7 +16,7 @@ from Vortex import LOAD_PLUG
 from Vortex import CMD_LIST
 import re
 import logging
-import inspect
+
 
 handler = Var.CMD_HNDLR if Var.CMD_HNDLR else r"\."
 sudo_hndlr = Var.SUDO_HNDLR if Var.SUDO_HNDLR else "."
@@ -36,30 +43,28 @@ def command(**args):
         try:
             if pattern is not None and not pattern.startswith('(?i)'):
                 args['pattern'] = '(?i)' + pattern
-        except BaseException:
+        except:
             pass
-
+        
+        
+        
         reg = re.compile('(.*)')
-        if pattern is not None:
+        if not pattern == None:
             try:
                 cmd = re.search(reg, pattern)
                 try:
-                    cmd = cmd.group(1).replace(
-                        "$",
-                        "").replace(
-                        "\\",
-                        "").replace(
-                        "^",
-                        "")
-                except BaseException:
+                    cmd = cmd.group(1).replace("$", "").replace("\\", "").replace("^", "")
+                except:
                     pass
-
+                
                 try:
                     CMD_LIST[file_test].append(cmd)
-                except BaseException:
+                except:
                     CMD_LIST.update({file_test: [cmd]})
-            except BaseException:
+            except:
                 pass
+
+                
 
         if allow_sudo:
             args["from_users"] = list(Var.SUDO_USERS)
@@ -68,7 +73,7 @@ def command(**args):
         del allow_sudo
         try:
             del args["allow_sudo"]
-        except BaseException:
+        except:
             pass
 
         if "allow_edited_updates" in args:
@@ -80,11 +85,11 @@ def command(**args):
             bot.add_event_handler(func, events.NewMessage(**args))
             try:
                 LOAD_PLUG[file_test].append(func)
-            except BaseException:
+            except:
                 LOAD_PLUG.update({file_test: [func]})
             return func
 
-        return decorator
+        return 
 
 
 def load_module(shortname):
@@ -92,7 +97,9 @@ def load_module(shortname):
         pass
     elif shortname.endswith("_"):
         import Vortex.utils
+        import sys
         import importlib
+        from pathlib import Path
         path = Path(f"Vortex/plugins/{shortname}.py")
         name = "Vortex.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -101,7 +108,9 @@ def load_module(shortname):
         print("Successfully (re)imported " + shortname)
     else:
         import Vortex.utils
+        import sys
         import importlib
+        from pathlib import Path
         path = Path(f"Vortex/plugins/{shortname}.py")
         name = "Vortex.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
@@ -130,6 +139,7 @@ def load_module(shortname):
         # support for other third-party plugins
         sys.modules["userbot.utils"] = Vortex.utils
         sys.modules["userbot"] = Vortex
+        print("Successfully imported ")
 
 
 def remove_plugin(shortname):
@@ -139,7 +149,7 @@ def remove_plugin(shortname):
                 bot.remove_event_handler(i)
             del LOAD_PLUG[shortname]
 
-        except BaseException:
+         except:
             name = f"Vortex.plugins.{shortname}"
 
             for i in reversed(range(len(bot._event_builders))):
@@ -161,15 +171,15 @@ def admin_cmd(pattern=None, **args):
 
     # get the pattern from the decorator
     if pattern is not None:
-        if pattern.startswith(r"\#"):
+        if pattern.startswith("\#"):
             # special fix for snip.py
             args["pattern"] = re.compile(pattern)
         else:
-            args["pattern"] = re.compile(handler + pattern)
-            cmd = handler + pattern
+            args["pattern"] = re.compile("\." + pattern)
+            cmd = "." + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
-            except BaseException:
+            except:
                 CMD_LIST.update({file_test: [cmd]})
 
     args["outgoing"] = True
@@ -185,11 +195,13 @@ def admin_cmd(pattern=None, **args):
         args["outgoing"] = True
 
     # add blacklist chats, UB should not respond in these chats
+    allow_edited_updates = False
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        args["allow_edited_updates"]
+        allow_edited_updates = args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     # check if the plugin should listen for outgoing 'messages'
+    is_message_enabled = True
 
     return events.NewMessage(**args)
 
@@ -197,14 +209,15 @@ def admin_cmd(pattern=None, **args):
 """ Userbot module for managing events.
  One of the main components of the userbot. """
 
-def on(**args):
+"""def on(**args):
     def decorator(func):
         async def wrapper(event):
             await func(event)
         bot.add_event_handler(wrapper, events.NewMessage(**args))
         return wrapper
 
-    return decorater
+    return decorater"""
+#no use of above lines you can remove it if you wann to do so 
 
 
 def register(**args):
@@ -225,25 +238,19 @@ def register(**args):
         del args['disable_edited']
 
     reg = re.compile('(.*)')
-    if pattern is not None:
+    if not pattern == None:
         try:
             cmd = re.search(reg, pattern)
             try:
-                cmd = cmd.group(1).replace(
-                    "$",
-                    "").replace(
-                    "\\",
-                    "").replace(
-                    "^",
-                    "")
-            except BaseException:
+                cmd = cmd.group(1).replace("$", "").replace("\\", "").replace("^", "")
+            except:
                 pass
 
             try:
                 CMD_LIST[file_test].append(cmd)
-            except BaseException:
+            except:
                 CMD_LIST.update({file_test: [cmd]})
-        except BaseException:
+        except:
             pass
 
     def decorator(func):
@@ -252,7 +259,7 @@ def register(**args):
         bot.add_event_handler(func, events.NewMessage(**args))
         try:
             LOAD_PLUG[file_test].append(func)
-        except Exception:
+        except Exception as e:
             LOAD_PLUG.update({file_test: [func]})
 
         return func
@@ -345,15 +352,15 @@ def sudo_cmd(pattern=None, **args):
 
     # get the pattern from the decorator
     if pattern is not None:
-        if pattern.startswith(r"\#"):
+        if pattern.startswith("\#"):
             # special fix for snip.py
             args["pattern"] = re.compile(pattern)
         else:
-            args["pattern"] = re.compile(sudo_hndlr + pattern)
-            cmd = sudo_hndlr + pattern
+            args["pattern"] = re.compile("\." + pattern)
+            cmd = "." + pattern
             try:
                 CMD_LIST[file_test].append(cmd)
-            except BaseException:
+            except:
                 CMD_LIST.update({file_test: [cmd]})
 
     args["outgoing"] = True
@@ -369,13 +376,17 @@ def sudo_cmd(pattern=None, **args):
         args["outgoing"] = True
 
     # add blacklist chats, UB should not respond in these chats
+    allow_edited_updates = False
     if "allow_edited_updates" in args and args["allow_edited_updates"]:
-        args["allow_edited_updates"]
+        allow_edited_updates = args["allow_edited_updates"]
         del args["allow_edited_updates"]
 
     # check if the plugin should listen for outgoing 'messages'
+    is_message_enabled = True
 
     return events.NewMessage(**args)
+
+#didnt think that above fun have some meaning 
 
 
 async def edit_or_reply(event, text):
