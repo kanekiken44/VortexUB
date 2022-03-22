@@ -12,7 +12,7 @@ from datetime import datetime
 from telethon import events
 from Vortex.Config import Var, Config
 from telegraph import Telegraph, upload_file
-from Vortex import CUSTOM_PMPERMIT
+from Vortex import CUSTOM_PMPERMIT, Vortex
 
 LOAD_MYBOT = Var.LOAD_MYBOT
 Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
@@ -28,7 +28,7 @@ auth_url = r["auth_url"]
 # start-others
 
 
-@tgbot.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
+@Vortex.on(events.NewMessage(pattern="^/start"))  # pylint: disable=oof
 async def start_all(event):
     if event.chat_id == OWNER_ID:
         return
@@ -42,7 +42,7 @@ async def start_all(event):
             pass
     if LOAD_MYBOT == "False":
         if BOT_PIC:
-            await tgbot.send_file(event.chat_id,
+            await Vortex.send_file(event.chat_id,
                                   BOT_PIC,
                                   caption=startotherdis,
                                   buttons=[
@@ -51,7 +51,7 @@ async def start_all(event):
                                           data="wew"))]
                                   )
         else:
-            await tgbot.send_message(event.chat_id,
+            await Vortex.send_message(event.chat_id,
                                      startotherdis,
                                      buttons=[
                                          (Button.inline(
@@ -60,7 +60,7 @@ async def start_all(event):
                                      )
     elif LOAD_MYBOT == "True":
         if BOT_PIC:
-            await tgbot.send_file(event.chat_id,
+            await Vortex.send_file(event.chat_id,
                                   BOT_PIC,
                                   caption=startotherena,
                                   buttons=[
@@ -71,7 +71,7 @@ async def start_all(event):
                                   ]
                                   )
         else:
-            await tgbot.send_message(event.chat_id,
+            await Vortex.send_message(event.chat_id,
                                      startotherena,
                                      buttons=[
                                          [Button.url(
@@ -84,10 +84,10 @@ async def start_all(event):
 # start-owner
 
 
-@tgbot.on(events.NewMessage(pattern="^/start",
+@Vortex.on(events.NewMessage(pattern="^/start",
                             from_users=OWNER_ID))  # pylint: disable=oof
 async def owner(event):
-    await tgbot.send_message(event.chat_id,
+    await Vortex.send_message(event.chat_id,
                              startowner,
                              buttons=[
                                  [Button.inline(
@@ -101,14 +101,14 @@ async def owner(event):
                              ])
 
 
-@tgbot.on(events.NewMessage(pattern="^/start logs",
+@Vortex.on(events.NewMessage(pattern="^/start logs",
                             from_users=OWNER_ID))  # pylint: disable=oof
 async def logs(event):
     try:
         Heroku = heroku3.from_key(Var.HEROKU_API_KEY)
         app = Heroku.app(Var.HEROKU_APP_NAME)
     except BaseException:
-        await tgbot.send_message(event.chat_id, " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
+        await Vortex.send_message(event.chat_id, " Please make sure your Heroku API Key, Your App name are configured correctly in the heroku var !")
         return
     with open('logs.txt', 'w') as log:
         log.write(app.get_log())
@@ -116,7 +116,7 @@ async def logs(event):
     url = "https://del.dog/documents"
     r = requests.post(url, data=ok.encode("UTF-8")).json()
     url = f"https://del.dog/{r['key']}"
-    await tgbot.send_file(
+    await Vortex.send_file(
         event.chat_id,
         "logs.txt",
         reply_to=event.id,
@@ -132,11 +132,11 @@ async def logs(event):
 # callbacks
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"wew"))
           )  # pylint: disable=oof
 async def settings(event):
     await event.delete()
-    await tgbot.send_message(event.chat_id,
+    await Vortex.send_message(event.chat_id,
                              "There isn't much that you can do over here rn.",
                              buttons=[
                                      [Button.inline(
@@ -144,11 +144,11 @@ async def settings(event):
                              ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"aboutvortex"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"aboutvortex"))
           )  # pylint: disable=oof
 async def settings(event):
     await event.delete()
-    await tgbot.send_message(event.chat_id,
+    await Vortex.send_message(event.chat_id,
                              f"This is the personal help bot of {THEFIRST_NAME}.",
                              buttons=[
                                      [Button.inline(
@@ -156,7 +156,7 @@ async def settings(event):
                              ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"deployme"))
           )  # pylint: disable=oof
 async def settings(event):
     await event.edit("Browse through the available options:",
@@ -168,12 +168,12 @@ async def settings(event):
                      ])
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"settings"))
           )  # pylint: disable=oof
 async def settings(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        await tgbot.send_message(event.chat_id,
+        await Vortex.send_message(event.chat_id,
                                  "Here are the available options.",
                                  buttons=[
                                      [Button.inline(
@@ -187,7 +187,7 @@ async def settings(event):
         await event.answer("You can't use me.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"stats"))
           )  # pylint: disable=oof
 async def settings(event):
     if event.sender_id == OWNER_ID:
@@ -200,12 +200,12 @@ async def settings(event):
         await event.answer("You can't use me.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmsparkbot"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmsparkbot"))
           )  # pylint: disable=oof
 async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        await tgbot.send_message(event.chat_id,
+        await Vortex.send_message(event.chat_id,
                                  "Here are the availabe settings for PM bot.",
                                  buttons=[
                                      [Button.inline("Enable/Disable", data="onoff"), Button.inline(
@@ -216,12 +216,12 @@ async def pmbot(event):
         await event.answer("You can't use me.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"onoff"))
           )  # pylint: disable=oof
 async def pmbot(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        await tgbot.send_message(event.chat_id,
+        await Vortex.send_message(event.chat_id,
                                  f"Turn the PM bot on or off.\nCurrently enabled: {LOAD_MYBOT}",
                                  buttons=[
                                      [Button.inline("Enable", data="enable"), Button.inline(
@@ -231,7 +231,7 @@ async def pmbot(event):
         await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"btpic"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"btpic"))
           )  # pylint: disable=oof
 async def bot(event):
     if event.sender_id == OWNER_ID:
@@ -260,16 +260,16 @@ async def bot(event):
         else:
             mssg = "`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        xx = await tgbot.send_message(event.chat_id, "Changing your Bot Pic, please wait for a minute")
+        xx = await Vortex.send_message(event.chat_id, "Changing your Bot Pic, please wait for a minute")
         heroku_var = app.config()
         heroku_var[Rizoeluserbot] = f"{url}"
-        mssg = f"Successfully changed your bot pic. Please wait for a minute.\n"
+        mssg = "Successfully changed your bot pic. Please wait for a minute.\\n"
         await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"cmssg"))
           )  # pylint: disable=oof
 async def custom(event):
     if event.sender_id == OWNER_ID:
@@ -279,7 +279,7 @@ async def custom(event):
             response = await response
             themssg = response.message.message
             if themssg == "/cancel":
-                await tgbot.send_message(event.chat_id, "Operation Cancelled.")
+                await Vortex.send_message(event.chat_id, "Operation Cancelled.")
                 return
             Vortex = "PMBOT_START_MSG"
             if Var.HEROKU_APP_NAME is not None:
@@ -291,12 +291,12 @@ async def custom(event):
             heroku_var[PM_START_MSG] = f"{themssg}"
             mssg = "Changed the PMBot start message!!\n**Restarting now**, please give me a minute."
             await event.delete()
-            await tgbot.send_message(event.chat_id, mssg)
+            await Vortex.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"enable"))
           )  # pylint: disable=oof
 async def enablee(event):
     if event.sender_id == OWNER_ID:
@@ -310,12 +310,12 @@ async def enablee(event):
         heroku_var[Vortex] = "True"
         mssg = "Successfully turned on PM Bot. Restarting now, please give me a minute."
         await event.delete()
-        await tgbot.send_message(event.chat_id, mssg)
+        await Vortex.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"disable"))
           )  # pylint: disable=oof
 async def dissable(event):
     if event.sender_id == OWNER_ID:
@@ -329,42 +329,42 @@ async def dissable(event):
         heroku_var[Vortex] = "False"
         mssg = "Successfully turned off PM Bot. Restarting now, please give me a minute."
         await event.delete()
-        await tgbot.send_message(event.chat_id, mssg)
+        await Vortex.send_message(event.chat_id, mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"Rizoelbroad"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"Rizoelbroad"))
           )  # pylint: disable=oof
 async def broadcast(event):
     if event.sender_id != OWNER_ID:
         await event.answer("You can't use this bot")
         return
-    await tgbot.send_message(event.chat_id, "Send the message you want to broadcast!\nSend /cancel to stop.")
+    await Vortex.send_message(event.chat_id, "Send the message you want to broadcast!\nSend /cancel to stop.")
     async with event.client.conversation(OWNER_ID) as conv:
         response = conv.wait_event(events.NewMessage(chats=OWNER_ID))
         response = await response
         themssg = response.message.message
     if themssg is None:
-        await tgbot.send_message(event.chat_id, "An error has occured...")
+        await Vortex.send_message(event.chat_id, "An error has occured...")
     if themssg == "/cancel":
-        await tgbot.send_message(event.chat_id, "Broadcast cancelled!")
+        await Vortex.send_message(event.chat_id, "Broadcast cancelled!")
         return
     targets = full_userbase()
     users_cnt = len(full_userbase())
     err = 0
     success = 0
-    lmao = await tgbot.send_message(event.chat_id, "Starting broadcast to {} users.".format(users_cnt))
+    lmao = await Vortex.send_message(event.chat_id, "Starting broadcast to {} users.".format(users_cnt))
     start = datetime.now()
     for ok in targets:
         try:
-            await tgbot.send_message(int(ok.chat_id), themssg)
+            await Vortex.send_message(int(ok.chat_id), themssg)
             success += 1
             await asyncio.sleep(0.1)
         except Exception as e:
             err += 1
             try:
-                await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"**Error**\n{str(e)}\nFailed for user: {chat_id}")
+                await Vortex.send_message(Var.PRIVATE_GROUP_ID, f"**Error**\n{str(e)}\nFailed for user: {chat_id}")
             except BaseException:
                 pass
     end = datetime.now()
@@ -377,12 +377,12 @@ Total users in bot: `{}`.\n
 """.format(success, ms, err, users_cnt)
     await lmao.edit(done_mssg)
     try:
-        await tgbot.send_message(Var.PRIVATE_GROUP_ID, f"#Broadcast\nCompleted sending a broadcast to {success} users.")
+        await Vortex.send_message(Var.PRIVATE_GROUP_ID, f"#Broadcast\nCompleted sending a broadcast to {success} users.")
     except BaseException:
-        await tgbot.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
+        await Vortex.send_message(event.chat_id, "Please add me to your Private log group for proper use.")
 
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"custom"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"custom"))
           )  # pylint: disable=oof
 async def custommm(event):
     await event.edit("Modules which you can customise -",
@@ -392,7 +392,7 @@ async def custommm(event):
                      ]
                      )
 # fmt: off
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"alive_cus")))
 async def alv(event):
     await event.edit("Here are the avaialble customisations for alive",
                     buttons=[
@@ -400,11 +400,11 @@ async def alv(event):
                         [Button.inline("Pic", data="alv_pic")]
                     ])
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_txt")))
 async def a_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        old_alv=Var.CUSTOM_ALIVE if Var.CUSTOM_ALIVE else "Default Alive message"
+        old_alv = Var.CUSTOM_ALIVE or "Default Alive message"
         Vortex = "CUSTOM_ALIVE"
         if Var.HEROKU_APP_NAME is not None:
             app=Heroku.app(Var.HEROKU_APP_NAME)
@@ -416,25 +416,25 @@ async def a_txt(event):
             response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
             response=await response
             themssg=response.message.message
-            if themssg == None:
+            if themssg is None:
                 await conv.send_message("Error!")
                 return
             if themssg == "/cancel":
                 return await conv.send_message("Cancelled!!")
             heroku_var=app.config()
-            xx = await tgbot.send_message(event.chat_id, "Changing your Alive Message, please wait for a minute")
+            xx = await Vortex.send_message(event.chat_id, "Changing your Alive Message, please wait for a minute")
             heroku_var[Vortex]=f"{themssg}"
             mssg=f"Changed your alive text from\n`{old_alv}`\nto\n`{themssg}`\n"
             await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"alv_pic"))
            )  # pylint: disable=C0321
 async def alv_pic(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        await tgbot.send_message(event.chat_id, "Send me a pic so as to set it as your alive pic.")
+        await Vortex.send_message(event.chat_id, "Send me a pic so as to set it as your alive pic.")
         async with event.client.conversation(OWNER_ID) as conv:
             await conv.send_message("Send /cancel to cancel the operation!")
             response = await conv.get_response()
@@ -458,15 +458,15 @@ async def alv_pic(event):
         else:
             mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        xx = await tgbot.send_message(event.chat_id, "Changing your Alive Pic, please wait for a minute")
+        xx = await Vortex.send_message(event.chat_id, "Changing your Alive Pic, please wait for a minute")
         heroku_var=app.config()
         heroku_var[Vortex]=f"{url}"
-        mssg=f"Successfully changed your alive pic. Please wait for a minute.\n"
+        mssg = "Successfully changed your alive pic. Please wait for a minute.\\n"
         await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_cus")))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_cus")))
 async def alv(event):
     await event.edit("Here are the available customisations for PMPermit",
                     buttons=[
@@ -474,11 +474,11 @@ async def alv(event):
                         [Button.inline("Picture", data="pm_pic")]
                     ])
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_txt")))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_txt")))
 async def a_txt(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        old_alv= CUSTOM_PMPERMIT if CUSTOM_PMPERMIT else "Default PMPermit message"
+        old_alv = CUSTOM_PMPERMIT or "Default PMPermit message"
         Vortex = "CUSTOM_PMPERMIT"
         if Var.HEROKU_APP_NAME is not None:
             app=Heroku.app(Var.HEROKU_APP_NAME)
@@ -490,31 +490,31 @@ async def a_txt(event):
             response=conv.wait_event(events.NewMessage(chats=OWNER_ID))
             response=await response
             themssg=response.message.message
-            if themssg == None:
+            if themssg is None:
                 await conv.send_message("Error!")
                 return
             if themssg == "/cancel":
                 await conv.send_message("Cancelled!!")
             heroku_var=app.config()
-            xx = await tgbot.send_message(event.chat_id, "Changing your PMPermit Message, please wait for a minute")
+            xx = await Vortex.send_message(event.chat_id, "Changing your PMPermit Message, please wait for a minute")
             heroku_var[Vortex]=f"{themssg}"
             mssg=f"Changed your PMPermit Message from\n`{old_alv}`\nto\n`{themssg}`\n"
             await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)
 
-@tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_pic"))
+@Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"pm_pic"))
            )  # pylint: disable=C0321
 async def alv_pic(event):
     if event.sender_id == OWNER_ID:
         await event.delete()
-        await tgbot.send_message(event.chat_id, "Send me a pic so as to set it as your PMPermit pic.")
+        await Vortex.send_message(event.chat_id, "Send me a pic so as to set it as your PMPermit pic.")
         async with event.client.conversation(OWNER_ID) as conv:
             await conv.send_message("Send /cancel to cancel the operation!")
             response = await conv.get_response()
             try:
-                themssg=response.message.message
-                if themssg == "/cancel":
+                themsg=response.message.message
+                if themsg == "/cancel":
                     await conv.send_message("Operation cancelled!!")
                     return
             except:
@@ -532,10 +532,10 @@ async def alv_pic(event):
         else:
             mssg="`**HEROKU**:" "\nPlease setup your` **HEROKU_APP_NAME**"
             return
-        xx = await tgbot.send_message(event.chat_id, "Changing your PMPermit Pic, please wait for a minute")
+        xx = await Vortex.send_message(event.chat_id, "Changing your PMPermit Pic, please wait for a minute")
         heroku_var=app.config()
         heroku_var[Vortex]=f"{url}"
-        mssg=f"Successfully changed your PMPermit pic. Please wait for a minute.\n"
+        mssg = "Successfully changed your PMPermit pic. Please wait for a minute.\\n"
         await xx.edit(mssg)
     else:
         await event.answer("You can't use this bot.", alert=True)

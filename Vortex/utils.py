@@ -7,8 +7,8 @@ import inspect
 import asyncio
 from traceback import format_exc
 import subprocess
-import time import gmtime, strftime
-from Vortex import bot
+from time import *
+from Vortex import Vortex as bot
 from telethon import events
 from pathlib import Path
 from Vortex.Config import Var, Config
@@ -149,7 +149,7 @@ def remove_plugin(shortname):
                 bot.remove_event_handler(i)
             del LOAD_PLUG[shortname]
 
-         except:
+        except:
             name = f"Vortex.plugins.{shortname}"
 
             for i in reversed(range(len(bot._event_builders))):

@@ -9,24 +9,17 @@ from math import ceil
 from telethon import Button, custom, events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
-from Vortex import ALIVE_NAME, CMD_HELP, CMD_LIST, CUSTOM_PMPERMIT, bot
+from Vortex import ALIVE_NAME, CMD_HELP, CMD_LIST, CUSTOM_PMPERMIT, Vortex as bot, Vortex
 from Vortex.plugins import vortexstats
 from Vortex.Config import Var
 
 PMPERMIT_PIC = os.environ.get("PMPERMIT_PIC", None)
-VORTEXPIC = (
-    PMPERMIT_PIC
-    if PMPERMIT_PIC
-    else "https://telegra.ph/file/54e6ac31560703b490821.jpg"
-)
+VORTEXPIC = PMPERMIT_PIC or "https://telegra.ph/file/54e6ac31560703b490821.jpg"
 PM_WARNS = {}
 PREV_REPLY_MESSAGE = {}
 myid = bot.uid
 lightningbot = Var.TG_BOT_USER_NAME_BF_HER
-if lightningbot.startswith("@"):
-    botname = lightningbot
-else:
-    botname = f"@{lightningbot}"
+botname = lightningbot if lightningbot.startswith("@") else f"@{lightningbot}"
 LOG_GP = Var.PRIVATE_GROUP_ID
 MESAG = (
     str(CUSTOM_PMPERMIT)
@@ -36,16 +29,7 @@ MESAG = (
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Vortex Is Alive"
 USER_BOT_WARN_ZERO = "`I told you Don't spam. Now you have been automatically blocked and reported until further notice.`\n\n**GoodBye Dumbass!** "
 
-if Var.LOAD_MYBOT == "True":
-    USER_BOT_NO_WARN = (
-        "**I am Vortex userbot And My Master Is [{}](tg://user?id={})**\n\n"
-        "{}\n\n"
-        "For Emergency Or if you are banned, PM me via {}"
-        "\nSelect any one reason for disturbing my master, from the available options\n\n".format(
-            DEFAULTUSER, myid, MESAG, botname
-        )
-    )
-elif Var.LOAD_MYBOT == "False":
+if Var.LOAD_MYBOT == "False":
     USER_BOT_NO_WARN = (
         "**I am Vortex userbot And My Master Is [{}](tg://user?id={})**\n\n"
         "{}\n"
@@ -54,13 +38,22 @@ elif Var.LOAD_MYBOT == "False":
         )
     )
 
+elif Var.LOAD_MYBOT == "True":
+    USER_BOT_NO_WARN = (
+        "**I am Vortex userbot And My Master Is [{}](tg://user?id={})**\n\n"
+        "{}\n\n"
+        "For Emergency Or if you are banned, PM me via {}"
+        "\nSelect any one reason for disturbing my master, from the available options\n\n".format(
+            DEFAULTUSER, myid, MESAG, botname
+        )
+    )
 CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "🖤")
 HELP_ROWS = int(os.environ.get("HELP_ROWS", 5))
 HELP_COLOUMNS = int(os.environ.get("HELP_COLOUMNS", 3))
 
-if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
+if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
 
-    @tgbot.on(events.InlineQuery)  # pylint:disable=E0602
+    @Vortex.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
         builder = event.builder
         result = None
@@ -106,10 +99,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
         elif event.query.user_id == bot.uid and query == "repo":
             result = builder.article(
                 title="Repository",
-                text=f"Vortexuserbot - Telegram Userbot by Team Vortex",
+                text="Vortexuserbot - Telegram Userbot by Team Vortex",
                 buttons=[
                     [
-                        Button.url("Repo", "https://GitHub.com/Kanekiken44/Vortex-deploy"),
+                        Button.url(
+                            "Repo", "https://GitHub.com/Kanekiken44/Vortex-deploy"
+                        ),
                         Button.url(
                             "Deploy Your Own",
                             "https://t.me/VortexUBSupport",
@@ -118,6 +113,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                     [Button.url("Vortexuserbot", "https://t.me/VortexUBSupport")],
                 ],
             )
+
         else:
             result = builder.article(
                 "Source Code",
@@ -143,7 +139,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
         await event.answer([result] if result else None)
 
-    @tgbot.on(
+    @Vortex.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(rb"helpme_next\((.+?)\)")
         )
@@ -160,7 +156,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             )
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmclick")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmclick")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This ain't for you, Master!"
@@ -170,7 +166,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 f"I am Vortexuserbot!! Here {DEFAULTUSER} to protect my master from unknown inboxing persons.\n\nI am [Vortexuserbot](t.me/VortexUB)"
             )
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"reopen")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"reopen")))
     async def megic(event):
         if event.query.user_id == bot.uid:
             buttons = paginate_help(0, CMD_LIST, "helpme")
@@ -179,7 +175,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             reply_pop_up_alert = "This bot ain't for u!!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"req")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"req")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This ain't for you, master!"
@@ -194,9 +190,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) is **requesting** something in PM!"
-            await tgbot.send_message(LOG_GP, tosend)
+            await Vortex.send_message(LOG_GP, tosend)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"chat")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"chat")))
     async def on_pm_click(event):
         event.query.user_id
         if event.query.user_id == bot.uid:
@@ -212,9 +208,9 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **Random Chatting**!"
-            await tgbot.send_message(LOG_GP, tosend)
+            await Vortex.send_message(LOG_GP, tosend)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This ain't for you, master!"
@@ -229,17 +225,18 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **help**!"
-            await tgbot.send_message(LOG_GP, tosend)
+            await Vortex.send_message(LOG_GP, tosend)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This is for unknown inboxers, not for you master!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
         else:
             await event.edit(
-                f"Oh, so you are here to spam \nDumbass.\nYou have been automatically blocked until my master unblocks you."
+                "Oh, so you are here to spam \\nDumbass.\\nYou have been automatically blocked until my master unblocks you."
             )
+
             await borg(functions.contacts.BlockRequest(event.query.user_id))
             target = await event.client(GetFullUserRequest(event.query.user_id))
             ok = event.query.user_id
@@ -247,12 +244,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             if first_name is not None:
                 first_name = first_name.replace("\u2060", "")
             first_name = html.escape(target.user.first_name)
-            await tgbot.send_message(
+            await Vortex.send_message(
                 LOG_GP,
                 f"[{first_name}](tg://user?id={ok}) tried to **spam** your inbox.\nSo, **blocked him**",
             )
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
             await event.edit(
@@ -262,12 +259,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             reply_pop_up_alert = "Please deploy own userbot from @VortexUBSupport"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"statcheck")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"statcheck")))
     async def rip(event):
         text = vortexstats
         await event.answer(text, alert=True)
 
-    @tgbot.on(events.callbackquery.CallbackQuery(data=re.compile(b"page\((.+?)\)")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"page\((.+?)\)")))
     async def page(event):
         if not event.query.user_id == bot.uid:
             return await event.answer(
@@ -286,7 +283,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
                 link_preview=False,
             )
 
-    @tgbot.on(
+    @Vortex.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(rb"helpme_prev\((.+?)\)")
         )
@@ -306,7 +303,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and tgbot is not None:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @tgbot.on(
+    @Vortex.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(b"us_plugin_(.*)")
         )

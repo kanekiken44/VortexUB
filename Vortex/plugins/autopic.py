@@ -7,6 +7,7 @@ from telethon.tl import functions
 
 from Vortex import *
 from Vortex import AUTO_PIC_FONT, AUTOPIC_FONT_COLOUR, AUTOPIC_TEXT, CMD_HELP
+from Vortex.utils import admin_cmd
 
 fntz = str(AUTO_PIC_FONT) if AUTO_PIC_FONT else "vortex.ttf"
 FONT_FILE_TO_USE = f"Extras/fonts/{fntz}"
@@ -23,7 +24,7 @@ async def autopic(event):
     await event.edit("**Autopic has been enabled!!!**")
     a = await event.get_reply_message()
     downloaded_file_name = "userbot/original_pic.png"
-    await Vortexuserbot.download_media(a, downloaded_file_name)
+    await Vortex.download_media(a, downloaded_file_name)
     photo = "Vortexuserbot/photo_pfp.png"
     while True:
         shutil.copy(downloaded_file_name, photo)

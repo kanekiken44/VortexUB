@@ -1,12 +1,15 @@
 """COMMANDS : .pbio, .ppic, .pname, .delpfp(maxm 100 once)"""
 
 import os
+from asyncio.log import logger
 
 from telethon.tl import functions
 from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosRequest
 from telethon.tl.types import InputPhoto
 
-from Vortex import CMD_HELP
+from Vortex import CMD_HELP, Vortex
+from Vortex.Config import Config
+from Vortex.utils import admin_cmd
 
 
 @Vortex.on(admin_cmd(pattern="pbio (.*)"))  # pylint:disable=E0602

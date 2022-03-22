@@ -1,4 +1,4 @@
-from asyncio import sleep
+from asyncio import sleep, events
 from datetime import datetime
 from os import remove
 
@@ -23,9 +23,9 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from Vortex import BOTLOG, BOTLOG_CHATID, CMD_HELP
+from Vortex import BOTLOG, BOTLOG_CHATID, CMD_HELP, Vortex
 from Vortex.Config import Var
-from Vortex.utils import admin_cmd, errors_handler, sudo_cmd
+from Vortex.utils import admin_cmd, errors_handler, sudo_cmd, edit_or_reply, eor
 
 PP_TOO_SMOL = "`The image is too small`"
 PP_ERROR = "`Failure while processing the image`"
@@ -77,7 +77,7 @@ BOTLOG_CHATID = Var.PRIVATE_GROUP_ID
 async def set_group_photo(gpic):
     """ For .setgpic command, changes the picture of a group """
     if not gpic.is_group:
-        await gpic.eor(event, "`I don't think this is a group.`")
+        await gpic.eor(events, "`I don't think this is a group.`")
         return
     replymsg = await gpic.get_reply_message()
     chat = await gpic.get_chat()

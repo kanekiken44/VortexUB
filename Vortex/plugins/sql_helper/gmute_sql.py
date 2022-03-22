@@ -72,7 +72,6 @@ def gmt(sender):
 
 
 def ungmt(sender):
-    riz = SESSION.query(GM).get((str(sender)))
-    if rem:
+    if riz := SESSION.query(GM).get((str(sender))):
         SESSION.delete(riz)
         SESSION.commit()

@@ -13,36 +13,31 @@ from telethon.tl import functions
 from telethon.tl.functions.channels import JoinChannelRequest as Jcr, LeaveChannelRequest as Lcr
 
 
-async def VorteX():
-   global bot
-   print("Starting Vortex")
-   if Var.STRING_SESSION:
-       rizz = str(Var.STRING_SESSION)
-       print("Starting Session.....")
-       bot = TelegramClient(StringSession(rizz), Var.APP_ID, Var.API_HASH)
-       try:
-           await bot.start()
-           botme = await bot.get_me()
-           await bot(Jcr(channel="@VortexUB"))
-           await bot(Jcr(channel="@VorteXUbSupport"))
-       except Exception as e:
-           print(e)
-           pass
-   else:
-       rizz = "VortexBot"
-       bot = TelegramClient(rizz, Var.APP_ID, Var.API_HASH)
-      print("Initialisation finished with no errors")
-      
-      try:
-         await bot.start()
-      except Exception as e:
-         pass
-       
+async def Vortex():
+    global bot
+
+    if Var.STRING_SESSION:
+        razz = str(Var.STRING_SESSION)
+        print("Starting Session.....")
+        bot = TelegramClient(StringSession(razz), Var.APP_ID, Var.API_HASH)
+        try:
+            await bot.start()
+            await bot.get_me()
+            await bot(Jcr(channel="@VortexUB"))
+            await bot(Jcr(channel="@VorteXUbSupport"))
+        except Exception as e:
+            print(e)
+    else:
+        razz = "VortexBot"
+        bot = TelegramClient(razz, Var.APP_ID, Var.API_HASH)
+        try:
+            await bot.start()
+        except Exception as e:
+            pass
 
 
 loop = asyncio.get_event_loop()
-loop.run_until_complete(VorteX())
-
+loop.run_until_complete(Vortex())
 
 StartTime = time.time()
 Vortexversion = "1.0.1"
@@ -73,7 +68,7 @@ if bool(ENV):
             format="✘ %(asctime)s ✘ - ⫸ %(name)s ⫷ - ⛝ %(levelname)s ⛝ - ║ %(message)s ║",
             level=INFO)
     LOGS = getLogger(__name__)
-    
+
     CONFIG_CHECK = os.environ.get(
         "___________PLOX_______REMOVE_____THIS_____LINE__________", None)
 
@@ -93,7 +88,6 @@ if bool(ENV):
     # Userbot logging feature switch.
     BOTLOG = sb(os.environ.get("BOTLOG", "False"))
 
-    
     PM_AUTO_BAN = sb(os.environ.get("PM_AUTO_BAN", "False"))
 
     # Console verbose logging
@@ -128,17 +122,17 @@ if bool(ENV):
 
     # Youtube API key
     YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", None)
-    
-    #Heroku vars
+
+    # Heroku vars
     HEROKU_APP_NAME = os.environ.get("HEROKU_APP_NAME", None)
     HEROKU_API_KEY = os.environ.get("HEROKU_API_KEY", None)
 
-    #repo url
+    # repo url
     UPSTREAM_REPO_URL = os.environ.get(
-       "UPSTREAM_REPO_URL",
-       "https://github.com/kanekiken44/vortexub.git")
-    UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "main")  
-      
+        "UPSTREAM_REPO_URL",
+        "https://github.com/kanekiken44/vortexub.git")
+    UPSTREAM_REPO_BRANCH = os.environ.get("UPSTREAM_REPO_BRANCH", "main")
+
     # Default .alive name
     ALIVE_NAME = os.environ.get("ALIVE_NAME", None)
 
@@ -177,13 +171,16 @@ if bool(ENV):
     LASTFM_USERNAME = os.environ.get("LASTFM_USERNAME", None)
     LASTFM_PASSWORD_PLAIN = os.environ.get("LASTFM_PASSWORD", None)
     LASTFM_PASS = pylast.md5(LASTFM_PASSWORD_PLAIN)
-    if not LASTFM_USERNAME == "None":
-        lastfm = pylast.LastFMNetwork(api_key=LASTFM_API,
-                                      api_secret=LASTFM_SECRET,
-                                      username=LASTFM_USERNAME,
-                                      password_hash=LASTFM_PASS)
-    else:
-        lastfm = None
+    lastfm = (
+        None
+        if LASTFM_USERNAME == "None"
+        else pylast.LastFMNetwork(
+            api_key=LASTFM_API,
+            api_secret=LASTFM_SECRET,
+            username=LASTFM_USERNAME,
+            password_hash=LASTFM_PASS,
+        )
+    )
 
     # Google Drive Module
     G_DRIVE_CLIENT_ID = os.environ.get("G_DRIVE_CLIENT_ID", None)
@@ -196,7 +193,6 @@ else:
     # Put your vars here ,Only if using local host
     PLACEHOLDER = None
 
-
 # Global Variables
 COUNT_MSG = 0
 USERS = {}
@@ -205,4 +201,3 @@ LASTMSG = {}
 CMD_HELP = {}
 ISAFK = False
 AFKREASON = None
-

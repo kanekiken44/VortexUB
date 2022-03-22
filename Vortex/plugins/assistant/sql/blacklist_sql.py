@@ -18,7 +18,7 @@ class blacklist(BASE):
         # self.reason = reason
 
     def __repr__(self):
-        return "<BL %s>" % self.chat_id
+        return f"<BL {self.chat_id}>"
 
 
 blacklist.__table__.create(checkfirst=True)
@@ -44,8 +44,7 @@ def check_is_black_list(chat_id):
 
 def rem_user_from_bl(chat_id):
     """remove from bl"""
-    __user = SESSION.query(blacklist).get(str(chat_id))
-    if __user:
+    if __user := SESSION.query(blacklist).get(str(chat_id)):
         SESSION.delete(__user)
         SESSION.commit()
 
