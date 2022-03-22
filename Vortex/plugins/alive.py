@@ -2,7 +2,9 @@
 import time
 from datetime import datetime
 from io import BytesIO
-
+from telethon import version as axel
+from sys import argv
+from sys import version as axelop
 import requests
 from PIL import Image
 
@@ -67,7 +69,7 @@ async def ifiamalive(alive):
     vortex = f"**The Vortex Userbot is Running.....**\n\n"
     vortex += f"┏━━━━━━━━━━━━━━━━━━━\n"
     vortex += (
-        f"┣➣ **Telethon Version**: `1.17`\n┣➣ **Python**: `3.9.2`\n"
+        f"┣➣ **Telethon Version**: `{axel}`\n┣➣ **Python**: `{axelop}`\n"
     )
     vortex += f"┣➣ **Vortex Version**: `{Vortexversion}`\n"
     vortex += f"┣➣ **Support**: @VortexUBSupport\n"
