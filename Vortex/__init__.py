@@ -15,7 +15,7 @@ from telethon.tl.functions.channels import JoinChannelRequest as Jcr, LeaveChann
 
 async def VorteX():
    global bot
-   
+   print("Starting Vortex")
    if Var.STRING_SESSION:
        rizz = str(Var.STRING_SESSION)
        print("Starting Session.....")
@@ -31,10 +31,13 @@ async def VorteX():
    else:
        rizz = "VortexBot"
        bot = TelegramClient(rizz, Var.APP_ID, Var.API_HASH)
-       try:
-          await bot.start()
-       except Exception as e:
-          pass
+      print("Initialisation finished with no errors")
+      
+      try:
+         await bot.start()
+      except Exception as e:
+         pass
+       
 
 
 loop = asyncio.get_event_loop()
