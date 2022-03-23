@@ -14,8 +14,7 @@ CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "🥀")
 if CMD_HNDLR is None:
     CMD_HNDLR = "."
 
-
-@Vortex.on(admin_cmd(pattern="help ?(.*)"))
+@Vortex.on(admin_cmd(outgoing=True, pattern="help ?(.*)"))
 async def cmd_list(event):
     if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
         return
