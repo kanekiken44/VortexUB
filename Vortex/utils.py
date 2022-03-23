@@ -18,8 +18,8 @@ import re
 import logging
 
 
-handler = Var.CMD_HNDLR if Var.CMD_HNDLR else r"\."
-sudo_hndlr = Var.SUDO_HNDLR if Var.SUDO_HNDLR else "."
+handler = Var.CMD_HNDLR or r"\."
+sudo_hndlr = Var.SUDO_HNDLR or "."
 
 
 def command(**args):
@@ -115,6 +115,12 @@ def load_module(shortname):
         name = "Vortex.plugins.{}".format(shortname)
         spec = importlib.util.spec_from_file_location(name, path)
         mod = importlib.util.module_from_spec(spec)
+        mod = importlib.util.module_from_spec(spec)
+        mod.bot = bot
+        mod.tgbot = bot.tgbot
+        mod.Var = Var
+        mod.command = command
+        mod.logger = logging.getLogger(shortname)
         mod.bot = bot
         mod.Var = Var
         mod.command = command

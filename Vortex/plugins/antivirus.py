@@ -1,7 +1,8 @@
 from telethon import events
 from telethon.errors.rpcerrorlist import YouBlockedUserError
 
-from Vortex import CMD_HELP
+from Vortex import CMD_HELP, Vortex
+from Vortex.utils import admin_cmd, sudo_cmd, eor
 
 
 @Vortex.on(admin_cmd(pattern="scan ?(.*)"))
@@ -18,7 +19,7 @@ async def _(event):
         await x.edit("```reply to a media message```")
         return
     chat = "@DrWebBot"
-    reply_message.sender
+    axel = reply_message.sender
     if reply_message.sender.bot:
         await x.edit("```Reply to actual users message.```")
         return
@@ -37,13 +38,12 @@ async def _(event):
             await x.edit(
                 "```can you kindly disable your forward privacy settings for good?```",
             )
+        elif response.text.startswith("Select"):
+            await x.edit("`Please go to` @DrWebBot `and select your language.`")
         else:
-            if response.text.startswith("Select"):
-                await x.edit("`Please go to` @DrWebBot `and select your language.`")
-            else:
-                await x.edit(
-                    f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}",
-                )
+            await x.edit(
+                f"**Antivirus scan was completed. I got dem final results.**\n {response.message.message}",
+            )
 
 
 CMD_HELP.update(

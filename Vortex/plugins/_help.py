@@ -1,11 +1,10 @@
-
 import os
 from typing import io
 
 from Vortex import *
 from Vortex import ALIVE_NAME, CMD_HELP, CMD_HNDLR, CMD_LIST
 from Vortex.Config import Config
-from Vortex.utils import admin_cmd
+from Vortex.utils import admin_cmd, command
 
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Vortex Userbot"
 CMD_HNDLR = Config.CMD_HNDLR
@@ -14,8 +13,9 @@ CUSTOM_HELP_EMOJI = os.environ.get("CUSTOM_HELP_EMOJI", "🥀")
 if CMD_HNDLR is None:
     CMD_HNDLR = "."
 
-@Vortex.on(admin_cmd(outgoing=True, pattern="help ?(.*)"))
-async def cmd_list(event):
+
+@command(pattern="^.help ?(.*)")
+async def cmd_list(event):  # sourcery no-metrics
     if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
         return
     tgbotusername = Var.TG_BOT_USER_NAME_BF_HER

@@ -5,7 +5,8 @@ import json
 import os
 from telethon import events
 from Vortex.utils import admin_cmd
-from Vortex import CMD_HELP
+from Vortex import CMD_HELP, Vortex
+
 
 @Vortex.on(admin_cmd(pattern="animepic"))
 async def _(event):
@@ -19,10 +20,11 @@ async def _(event):
     r = requests.get(finalcat, allow_redirects=True)
     open('animepicvortex.jpg', 'wb').write(r.content)
     await Vortex.send_file(
-                        event.chat_id,
-                        'animepicvortex.jpg',
-                        caption=f"Here's Your Waifu..\nGathered By Your Vortex userbot",
-                    )
+        event.chat_id,
+        'animepicvortex.jpg',
+        caption="Here's Your Waifu..\\nGathered By Your Vortex userbot",
+    )
+
     os.system("rm animepicvortex.jpg")
 
 CMD_HELP.update(

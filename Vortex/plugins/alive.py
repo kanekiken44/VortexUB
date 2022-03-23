@@ -8,9 +8,10 @@ from sys import version as axelop
 import requests
 from PIL import Image
 
-from Vortex import ALIVE_NAME, CMD_HELP, Vortexversion
+from Vortex import ALIVE_NAME, CMD_HELP, Vortexversion, Vortex
 from Vortex.__init__ import StartTime
 from Vortex.Config import Config, Var
+from Vortex.utils import admin_cmd
 
 START_PIC = "https://telegra.ph/file/cc29c25774e5906547310.jpg"
 

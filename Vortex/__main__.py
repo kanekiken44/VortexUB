@@ -57,7 +57,8 @@ print("Vortex Userbot has been deployed! ")
 
 bot.loop.run_until_complete(startup_log_all_done())
 
-if len(argv) not in (1, 3, 4):
-    bot.disconnect()
-else:
+if len(argv) in {1, 3, 4}:
     bot.run_until_disconnected()
+
+else:
+    bot.disconnect()

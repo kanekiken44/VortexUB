@@ -6,9 +6,7 @@ import bs4
 import re
 from telethon import *
 from Vortex.utils import admin_cmd
-from Vortex import CMD_HELP
-
-
+from Vortex import CMD_HELP, Vortex
 
 
 @Vortex.on(admin_cmd(pattern="app (.*)"))
