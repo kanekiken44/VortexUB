@@ -1,4 +1,5 @@
 from . import *
+from Vortex import Vortex
 
 @Vortex.on(admin_cmd(pattern="dm ?(.*)"))
 async def pmto(event):
