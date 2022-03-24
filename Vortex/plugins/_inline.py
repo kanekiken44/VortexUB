@@ -9,7 +9,8 @@ from math import ceil
 from telethon import Button, custom, events, functions
 from telethon.tl.functions.users import GetFullUserRequest
 
-from Vortex import ALIVE_NAME, CMD_HELP, CMD_LIST, CUSTOM_PMPERMIT, bot, Vortex
+from Vortex import Vortex as bot
+from Vortex import ALIVE_NAME, CMD_HELP, CMD_LIST, CUSTOM_PMPERMIT, Vortex
 from Vortex.plugins import vortexstats
 from Vortex.Config import Var
 
