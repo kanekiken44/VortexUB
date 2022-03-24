@@ -1,8 +1,9 @@
 from telethon.tl.types import Channel
 
 from Vortex import *
-from Vortex import ALIVE_NAME, bot, Vortexversion
+from Vortex import ALIVE_NAME, Vortexversion
 from Vortex.Config import Config, Var
+from Vortex import Vortex as bot
 
 if Var.PRIVATE_GROUP_ID:
     log = "Enabled"
