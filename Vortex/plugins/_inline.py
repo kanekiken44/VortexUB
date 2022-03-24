@@ -53,7 +53,7 @@ HELP_COLOUMNS = int(os.environ.get("HELP_COLOUMNS", 3))
 
 if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
 
-    @bot.on(events.InlineQuery)  # pylint:disable=E0602
+    @Vortex.on(events.InlineQuery)  # pylint:disable=E0602
     async def inline_handler(event):
         builder = event.builder
         result = None
@@ -117,7 +117,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
         else:
             result = builder.article(
                 "Source Code",
-                text="**Welcome to Vortexuserbot**\n\n`Click below buttons for more`",
+                text="**Welcome to VortexUserbot**\n\n`Click below buttons for more`",
                 buttons=[
                     [custom.Button.url("✨SUPPORT✨", "https://t.me/VortexUBSupport")],
                     [
@@ -139,7 +139,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             )
         await event.answer([result] if result else None)
 
-    @bot.on(
+    @Vortex.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(rb"helpme_next\((.+?)\)")
         )
@@ -152,11 +152,11 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             await event.edit(buttons=buttons)
         else:
             reply_pop_up_alert = (
-                "Please make your own Vortexuserbot by @VortexUB , and don't use mine!"
+                "Please make your own VortexUserbot by @VortexUB , and don't use mine!"
             )
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmclick")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"pmclick")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This ain't for you, Master!"
@@ -166,7 +166,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
                 f"I am Vortexuserbot!! Here {DEFAULTUSER} to protect my master from unknown inboxing persons.\n\nI am [Vortexuserbot](t.me/VortexUB)"
             )
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"reopen")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"reopen")))
     async def megic(event):
         if event.query.user_id == bot.uid:
             buttons = paginate_help(0, CMD_LIST, "helpme")
@@ -175,7 +175,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             reply_pop_up_alert = "This bot ain't for u!!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"req")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"req")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This ain't for you, master!"
@@ -192,7 +192,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) is **requesting** something in PM!"
             await Vortex.send_message(LOG_GP, tosend)
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"chat")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"chat")))
     async def on_pm_click(event):
         event.query.user_id
         if event.query.user_id == bot.uid:
@@ -210,7 +210,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **Random Chatting**!"
             await Vortex.send_message(LOG_GP, tosend)
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"plshelpme")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This ain't for you, master!"
@@ -227,7 +227,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             tosend = f"Hey {DEFAULTUSER}, [{first_name}](tg://user?id={ok}) wants to PM you for **help**!"
             await Vortex.send_message(LOG_GP, tosend)
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"heheboi")))
     async def on_pm_click(event):
         if event.query.user_id == bot.uid:
             reply_pop_up_alert = "This is for unknown inboxers, not for you master!"
@@ -249,7 +249,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
                 f"[{first_name}](tg://user?id={ok}) tried to **spam** your inbox.\nSo, **blocked him**",
             )
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"close")))
     async def on_plug_in_callback_query_handler(event):
         if event.query.user_id == bot.uid:
             await event.edit(
@@ -259,12 +259,12 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             reply_pop_up_alert = "Please deploy own userbot from @VortexUBSupport"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"statcheck")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"statcheck")))
     async def rip(event):
         text = vortexstats
         await event.answer(text, alert=True)
 
-    @bot.on(events.callbackquery.CallbackQuery(data=re.compile(b"page\((.+?)\)")))
+    @Vortex.on(events.callbackquery.CallbackQuery(data=re.compile(b"page\((.+?)\)")))
     async def page(event):
         if not event.query.user_id == bot.uid:
             return await event.answer(
@@ -283,7 +283,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
                 link_preview=False,
             )
 
-    @bot.on(
+    @Vortex.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(rb"helpme_prev\((.+?)\)")
         )
@@ -303,7 +303,7 @@ if Var.TG_BOT_USER_NAME_BF_HER is not None and Vortex is not None:
             reply_pop_up_alert = "Please get your own Userbot, and don't use mine!"
             await event.answer(reply_pop_up_alert, cache_time=0, alert=True)
 
-    @bot.on(
+    @Vortex.on(
         events.callbackquery.CallbackQuery(  # pylint:disable=E0602
             data=re.compile(b"us_plugin_(.*)")
         )
