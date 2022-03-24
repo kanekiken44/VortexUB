@@ -14,7 +14,7 @@ if CMD_HNDLR is None:
     CMD_HNDLR = "."
 
 
-@command(pattern="^.help ?(.*)")
+@Vortex.on(admin_cmd(outgoing=True, pattern="help ?(.*)"))
 async def cmd_list(event):  # sourcery no-metrics
     if event.text[0].isalpha() or event.text[0] in ("/", "#", "@", "!"):
         return
