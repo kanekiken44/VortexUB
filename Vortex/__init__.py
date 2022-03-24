@@ -14,24 +14,24 @@ from telethon.tl.functions.channels import JoinChannelRequest as Jcr, LeaveChann
 
 
 async def Vortex():
-    global bot
+    global Vortex
 
     if Var.STRING_SESSION:
         razz = str(Var.STRING_SESSION)
         print("Starting Session.....")
-        bot = TelegramClient(StringSession(razz), Var.APP_ID, Var.API_HASH)
+        Vortex = TelegramClient(StringSession(razz), Var.APP_ID, Var.API_HASH)
         try:
-            await bot.start()
-            await bot.get_me()
-            await bot(Jcr(channel="@VortexUB"))
-            await bot(Jcr(channel="@VorteXUbSupport"))
+            await Vortex.start()
+            await Vortex.get_me()
+            await Vortex(Jcr(channel="@VortexUB"))
+            await Vortex(Jcr(channel="@VorteXUbSupport"))
         except Exception as e:
             print(e)
     else:
         razz = "VortexBot"
-        bot = TelegramClient(razz, Var.APP_ID, Var.API_HASH)
+        Vortex = TelegramClient(razz, Var.APP_ID, Var.API_HASH)
         try:
-            await bot.start()
+            await Vortex.start()
         except Exception as e:
             pass
 
