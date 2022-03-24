@@ -12,6 +12,7 @@ from Vortex import ALIVE_NAME, CMD_HELP, Vortexversion, Vortex
 from Vortex.__init__ import StartTime
 from Vortex.Config import Config, Var
 from Vortex.utils import admin_cmd
+from Vortex import Vortex as bot
 
 START_PIC = "https://telegra.ph/file/cc29c25774e5906547310.jpg"
 
