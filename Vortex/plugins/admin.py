@@ -23,7 +23,8 @@ from telethon.tl.types import (
     MessageMediaPhoto,
 )
 
-from Vortex import BOTLOG, BOTLOG_CHATID, CMD_HELP, Vortex, bot
+from Vortex import Vortex as bot
+from Vortex import BOTLOG, BOTLOG_CHATID, CMD_HELP, Vortex
 from Vortex.Config import Var
 from Vortex.utils import admin_cmd, errors_handler, sudo_cmd, edit_or_reply, eor
 
