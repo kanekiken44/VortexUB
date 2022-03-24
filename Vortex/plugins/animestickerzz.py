@@ -1,8 +1,9 @@
 import random
 import re
 
-from Vortex import CMD_HELP, bot
+from Vortex import CMD_HELP
 from Vortex.utils import admin_cmd
+from Vortex import Vortex as bot
 
 EMOJI_PATTERN = re.compile(
     "["
