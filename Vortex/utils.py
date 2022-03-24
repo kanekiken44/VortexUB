@@ -219,7 +219,7 @@ def on(**args):
  def decorator(func):
      async def wrapper(event):
          await func(event)
-     bot.add_event_handler(wrapper, events.NewMessage(**args))
+     Vortex.add_event_handler(wrapper, events.NewMessage(**args))
      return wrapper
 
  return decorater
