@@ -7,7 +7,8 @@ from telethon.tl import functions
 from telethon.tl.functions.photos import DeletePhotosRequest, GetUserPhotosRequest
 from telethon.tl.types import InputPhoto
 
-from Vortex import CMD_HELP, Vortex, bot
+from Vortex import Vortex as bot
+from Vortex import CMD_HELP, Vortex
 from Vortex.Config import Config
 from Vortex.utils import admin_cmd
 
