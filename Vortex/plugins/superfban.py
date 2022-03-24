@@ -140,7 +140,7 @@ async def _(event):
 # By @HeisenbergTheDanger, @its_xditya
 
 
-@bot.on(admin_cmd("sunfban ?(.*)"))
+@Vortex.on(admin_cmd("sunfban ?(.*)"))
 async def _(event):
     if event.fwd_from:
         return
@@ -213,4 +213,4 @@ async def _(event):
     await event.edit(f"SuperUnFBan Completed. Affected {len(fedList)} feds.\n")
 
 
-#BC
+#BC MAA CHUDAO
