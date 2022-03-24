@@ -117,7 +117,7 @@ def load_module(shortname):
         mod = importlib.util.module_from_spec(spec)
         mod = importlib.util.module_from_spec(spec)
         mod.bot = bot
-        mod.Vortex = bot.Vortex 
+        #mod.Vortex = bot.Vortex 
         mod.Var = Var
         mod.command = command
         mod.logger = logging.getLogger(shortname)
