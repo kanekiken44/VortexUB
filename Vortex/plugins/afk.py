@@ -10,6 +10,7 @@ from telegraph import Telegraph, upload_file
 from telethon import Button, events
 from telethon.tl import functions, types
 
+from Vortex import Vortex as bot
 from Vortex import CMD_HELP
 from Vortex.Config import Config, Var
 
