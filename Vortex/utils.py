@@ -9,6 +9,7 @@ from traceback import format_exc
 import subprocess
 from time import *
 from Vortex import Vortex
+from Vortex import bot
 from telethon import events
 from pathlib import Path
 from Vortex.Config import Var, Config
