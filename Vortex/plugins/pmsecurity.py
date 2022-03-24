@@ -21,12 +21,12 @@ myid = bot.uid
 MESAG = (
     str(CUSTOM_PMPERMIT)
     if CUSTOM_PMPERMIT
-    else "`Vortexuserbot PM security! Please wait for me to approve you. 😊"
+    else "`VortexUserbot PM security! Please wait for me to approve you. 😊"
 )
 DEFAULTUSER = str(ALIVE_NAME) if ALIVE_NAME else "Vortexuserbot User"
-USER_BOT_WARN_ZERO = "`I had warned you not to spam. Now you have been blocked and reported until further notice.`\n\n**GoodBye!** "
+USER_BOT_WARN_ZERO = "`I had warned you not to spam. Now you have been blocked and reported until further notice.`\n\n**GoodBye Kiddo!** "
 USER_BOT_NO_WARN = (
-    "**PM Security ~ Vortexuserbot**\n\nNice to see you here, but  "
+    "**PM Security ~ VortexUserbot**\n\nNice to see you here, but  "
     "[{}](tg://user?id={}) is currently unavailable.\nThis is an automated message.\n\n"
     "{}\n\n**You have** `{}/{}` **warnings...**"
     "\n\n   ~ Thank You."
@@ -129,7 +129,7 @@ async def approve_p_m(event):
     if event.fwd_from:
         return
     approved_users = pmpermit_sql.get_all_approved()
-    APPROVED_PMs = "[Vortexuserbot] Currently Approved PMs\n"
+    APPROVED_PMs = "[VortexUserbot] Currently Approved PMs\n"
     if len(approved_users) > 0:
         for a_user in approved_users:
             if a_user.reason:
@@ -146,7 +146,7 @@ async def approve_p_m(event):
                 out_file,
                 force_document=True,
                 allow_cache=False,
-                caption="[Vortexuserbot]Current Approved PMs",
+                caption="[VortexUserbot]Current Approved PMs",
                 reply_to=event,
             )
             await event.delete()
@@ -154,7 +154,7 @@ async def approve_p_m(event):
         await event.edit(APPROVED_PMs)
 
 
-@bot.on(events.NewMessage(incoming=True))
+@Vortex.on(events.NewMessage(incoming=True))
 async def on_new_private_message(event):
     if event.sender_id == bot.uid:
         return
